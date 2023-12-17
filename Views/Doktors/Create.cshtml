@@ -1,27 +1,29 @@
-﻿@model HospitalAppointmentSystem.Models.Poliklinik
+﻿@model HospitalAppointmentSystem.Models.Doktor
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
 }
 
-<h1>Edit</h1>
+<h1>Create</h1>
 
-<h4>Poliklinik</h4>
+<h4>Doktor</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="PoliklinikId" />
             <div class="form-group">
                 <label asp-for="BolumId" class="control-label"></label>
-                <select asp-for="BolumId" class="form-control" asp-items="ViewBag.BolumId"></select>
-                <span asp-validation-for="BolumId" class="text-danger"></span>
+                <select asp-for="BolumId" class ="form-control" asp-items="ViewBag.BolumId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="PoliklinikAdi" class="control-label"></label>
-                <input asp-for="PoliklinikAdi" class="form-control" />
-                <span asp-validation-for="PoliklinikAdi" class="text-danger"></span>
+                <label asp-for="PoliklinikId" class="control-label"></label>
+                <select asp-for="PoliklinikId" class ="form-control" asp-items="ViewBag.PoliklinikId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoktorAdi" class="control-label"></label>
+                <input asp-for="DoktorAdi" class="form-control" />
+                <span asp-validation-for="DoktorAdi" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Telefon" class="control-label"></label>
@@ -29,7 +31,7 @@
                 <span asp-validation-for="Telefon" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>

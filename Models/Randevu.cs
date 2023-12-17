@@ -9,6 +9,7 @@ namespace HospitalAppointmentSystem.Models
         public int? DoktorId { get; set; }
         public int? HastaId { get; set; }
         public DateTime RandevuTarihiSaat { get; set; }
+        public string? Aciklama { get; set; }
 
         public virtual Doktor? Doktor { get; set; }
         public virtual Hastum? Hasta { get; set; }

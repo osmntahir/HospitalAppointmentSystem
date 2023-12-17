@@ -9,90 +9,87 @@ using HospitalAppointmentSystem.Models;
 
 namespace HospitalAppointmentSystem.Controllers
 {
-    public class PolikliniksController : Controller
+    public class BolumsController : Controller
     {
         private readonly hospitalContext _context;
 
-        public PolikliniksController(hospitalContext context)
+        public BolumsController(hospitalContext context)
         {
             _context = context;
         }
 
-        // GET: Polikliniks
+        // GET: Bolums
         public async Task<IActionResult> Index()
         {
-            var hospitalContext = _context.Polikliniks.Include(p => p.Bolum);
-            return View(await hospitalContext.ToListAsync());
+              return _context.Bolums != null ? 
+                          View(await _context.Bolums.ToListAsync()) :
+                          Problem("Entity set 'hospitalContext.Bolums'  is null.");
         }
 
-        // GET: Polikliniks/Details/5
+        // GET: Bolums/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Polikliniks == null)
+            if (id == null || _context.Bolums == null)
             {
                 return NotFound();
             }
 
-            var poliklinik = await _context.Polikliniks
-                .Include(p => p.Bolum)
-                .FirstOrDefaultAsync(m => m.PoliklinikId == id);
-            if (poliklinik == null)
+            var bolum = await _context.Bolums
+                .FirstOrDefaultAsync(m => m.BolumId == id);
+            if (bolum == null)
             {
                 return NotFound();
             }
 
-            return View(poliklinik);
+            return View(bolum);
         }
 
-        // GET: Polikliniks/Create
+        // GET: Bolums/Create
         public IActionResult Create()
         {
-            ViewData["BolumId"] = new SelectList(_context.Bolums, "BolumId", "BolumId");
             return View();
         }
 
-        // POST: Polikliniks/Create
+        // POST: Bolums/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PoliklinikId,BolumId,PoliklinikAdi,Telefon")] Poliklinik poliklinik)
+        public async Task<IActionResult> Create([Bind("BolumId,BolumAdi,Aciklama")] Bolum bolum)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(poliklinik);
+                _context.Add(bolum);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BolumId"] = new SelectList(_context.Bolums, "BolumId", "BolumId", poliklinik.BolumId);
-            return View(poliklinik);
+            return View(bolum);
         }
 
-        // GET: Polikliniks/Edit/5
+        // GET: Bolums/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Polikliniks == null)
+            if (id == null || _context.Bolums == null)
             {
                 return NotFound();
             }
 
-            var poliklinik = await _context.Polikliniks.FindAsync(id);
-            if (poliklinik == null)
+            var bolum = await _context.Bolums.FindAsync(id);
+            if (bolum == null)
             {
                 return NotFound();
             }
-            ViewData["BolumId"] = new SelectList(_context.Bolums, "BolumId", "BolumId", poliklinik.BolumId);
-            return View(poliklinik);
+            return View(bolum);
         }
 
-        // POST: Polikliniks/Edit/5
+        // POST: Bolums/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PoliklinikId,BolumId,PoliklinikAdi,Telefon")] Poliklinik poliklinik)
+        public async Task<IActionResult> Edit(int id, [Bind("BolumId,BolumAdi,Aciklama")] Bolum bolum)
         {
-            if (id != poliklinik.PoliklinikId)
+            if (id != bolum.BolumId)
             {
                 return NotFound();
             }
@@ -101,12 +98,12 @@ namespace HospitalAppointmentSystem.Controllers
             {
                 try
                 {
-                    _context.Update(poliklinik);
+                    _context.Update(bolum);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PoliklinikExists(poliklinik.PoliklinikId))
+                    if (!BolumExists(bolum.BolumId))
                     {
                         return NotFound();
                     }
@@ -117,51 +114,49 @@ namespace HospitalAppointmentSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["BolumId"] = new SelectList(_context.Bolums, "BolumId", "BolumId", poliklinik.BolumId);
-            return View(poliklinik);
+            return View(bolum);
         }
 
-        // GET: Polikliniks/Delete/5
+        // GET: Bolums/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Polikliniks == null)
+            if (id == null || _context.Bolums == null)
             {
                 return NotFound();
             }
 
-            var poliklinik = await _context.Polikliniks
-                .Include(p => p.Bolum)
-                .FirstOrDefaultAsync(m => m.PoliklinikId == id);
-            if (poliklinik == null)
+            var bolum = await _context.Bolums
+                .FirstOrDefaultAsync(m => m.BolumId == id);
+            if (bolum == null)
             {
                 return NotFound();
             }
 
-            return View(poliklinik);
+            return View(bolum);
         }
 
-        // POST: Polikliniks/Delete/5
+        // POST: Bolums/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Polikliniks == null)
+            if (_context.Bolums == null)
             {
-                return Problem("Entity set 'hospitalContext.Polikliniks'  is null.");
+                return Problem("Entity set 'hospitalContext.Bolums'  is null.");
             }
-            var poliklinik = await _context.Polikliniks.FindAsync(id);
-            if (poliklinik != null)
+            var bolum = await _context.Bolums.FindAsync(id);
+            if (bolum != null)
             {
-                _context.Polikliniks.Remove(poliklinik);
+                _context.Bolums.Remove(bolum);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PoliklinikExists(int id)
+        private bool BolumExists(int id)
         {
-          return (_context.Polikliniks?.Any(e => e.PoliklinikId == id)).GetValueOrDefault();
+          return (_context.Bolums?.Any(e => e.BolumId == id)).GetValueOrDefault();
         }
     }
 }

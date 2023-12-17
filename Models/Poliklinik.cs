@@ -13,6 +13,7 @@ namespace HospitalAppointmentSystem.Models
         public int PoliklinikId { get; set; }
         public int? BolumId { get; set; }
         public string PoliklinikAdi { get; set; } = null!;
+        public string? Telefon { get; set; }
 
         public virtual Bolum? Bolum { get; set; }
         public virtual ICollection<Doktor> Doktors { get; set; }

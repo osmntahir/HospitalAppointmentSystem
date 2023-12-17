@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HospitalAppointmentSystem.Models.Poliklinik>
+﻿@model IEnumerable<HospitalAppointmentSystem.Models.Doktor>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,13 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.PoliklinikAdi)
+                @Html.DisplayNameFor(model => model.DoktorAdi)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Telefon)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Bolum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Poliklinik)
             </th>
             <th></th>
         </tr>
@@ -28,7 +31,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.PoliklinikAdi)
+                @Html.DisplayFor(modelItem => item.DoktorAdi)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Telefon)
@@ -37,9 +40,12 @@
                 @Html.DisplayFor(modelItem => item.Bolum.BolumId)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.PoliklinikId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PoliklinikId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PoliklinikId">Delete</a>
+                @Html.DisplayFor(modelItem => item.Poliklinik.PoliklinikId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DoktorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DoktorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DoktorId">Delete</a>
             </td>
         </tr>
 }
