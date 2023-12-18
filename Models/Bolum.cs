@@ -7,7 +7,6 @@ namespace HospitalAppointmentSystem.Models
     {
         public Bolum()
         {
-            Doktors = new HashSet<Doktor>();
             Polikliniks = new HashSet<Poliklinik>();
         }
 
@@ -15,7 +14,6 @@ namespace HospitalAppointmentSystem.Models
         public string BolumAdi { get; set; } = null!;
         public string? Aciklama { get; set; }
 
-        public virtual ICollection<Doktor> Doktors { get; set; }
         public virtual ICollection<Poliklinik> Polikliniks { get; set; }
     }
 }

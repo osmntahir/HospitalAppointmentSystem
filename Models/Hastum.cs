@@ -18,6 +18,7 @@ namespace HospitalAppointmentSystem.Models
         public string TelefonNumarasi { get; set; } = null!;
         public string? Email { get; set; }
 
+        public virtual HastaLogin? HastaLogin { get; set; }
         public virtual ICollection<Randevu> Randevus { get; set; }
     }
 }
