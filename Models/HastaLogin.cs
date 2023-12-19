@@ -7,7 +7,7 @@ namespace HospitalAppointmentSystem.Models
     {
         public int HastaId { get; set; }
         public string UserName { get; set; } = null!;
-        public string PasswordHash { get; set; } = null!;
+        public string Password { get; set; } = null!;
 
         public virtual Hastum Hasta { get; set; } = null!;
     }

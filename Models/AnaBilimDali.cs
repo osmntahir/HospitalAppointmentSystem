@@ -3,16 +3,15 @@ using System.Collections.Generic;
 
 namespace HospitalAppointmentSystem.Models
 {
-    public partial class Bolum
+    public partial class AnaBilimDali
     {
-        public Bolum()
+        public AnaBilimDali()
         {
             Polikliniks = new HashSet<Poliklinik>();
         }
 
-        public int BolumId { get; set; }
-        public string BolumAdi { get; set; } = null!;
-        public string? Aciklama { get; set; }
+        public int AnaBilimDaliId { get; set; }
+        public string Adi { get; set; } = null!;
 
         public virtual ICollection<Poliklinik> Polikliniks { get; set; }
     }

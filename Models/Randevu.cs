@@ -11,6 +11,7 @@ namespace HospitalAppointmentSystem.Models
         public DateTime RandevuTarihiSaat { get; set; }
         public string? Aciklama { get; set; }
 
+        public virtual Doktor? Doktor { get; set; }
         public virtual Hastum? Hasta { get; set; }
     }
 }

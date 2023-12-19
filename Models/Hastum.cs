@@ -11,8 +11,8 @@ namespace HospitalAppointmentSystem.Models
         }
 
         public int HastaId { get; set; }
-        public string Ad { get; set; } = null!;
-        public string Soyad { get; set; } = null!;
+        public string Adi { get; set; } = null!;
+        public string Soyadi { get; set; } = null!;
         public string Cinsiyet { get; set; } = null!;
         public DateTime DogumTarihi { get; set; }
         public string TelefonNumarasi { get; set; } = null!;
