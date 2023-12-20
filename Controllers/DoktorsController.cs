@@ -139,42 +139,23 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(doktor);
         }
+
         // POST: Doktors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public  async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Doktors == null)
             {
-                return Problem("Entity set 'hospitalContext.Doktors' is null.");
+                return Problem("Entity set 'hospitalContext.Doktors'  is null.");
             }
-
             var doktor = await _context.Doktors.FindAsync(id);
-
-            if (doktor == null)
+            if (doktor != null)
             {
-                return NotFound();
+                _context.Doktors.Remove(doktor);
             }
-
-            // İlgili çalışma günlerini bul ve sil
-            var calismaGunler = _context.CalismaGuns.Where(c => c.DoktorId == id).ToList();
-
-            foreach (var calismaGun in calismaGunler)
-            {
-                _context.CalismaGuns.Remove(calismaGun);
-            }
-
-            // İlgili randevuları bul ve sil
-            var randevular = _context.Randevus.Where(c => c.DoktorId == id).ToList();
-
-            foreach (var randevu in randevular)
-            {
-                _context.Randevus.Remove(randevu);
-            }
-
-            _context.Doktors.Remove(doktor);
+            
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
 
