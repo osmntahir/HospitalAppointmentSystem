@@ -12,12 +12,10 @@ namespace HospitalAppointmentSystem.Controllers
     public class PolikliniksController : Controller
     {
         private readonly hospitalContext _context;
-        private readonly DoktorsController _doktorController;
 
-        public PolikliniksController(hospitalContext context, DoktorsController doktorController)
+        public PolikliniksController(hospitalContext context)
         {
             _context = context;
-            _doktorController = doktorController;
         }
 
         // GET: Polikliniks
@@ -149,27 +147,15 @@ namespace HospitalAppointmentSystem.Controllers
         {
             if (_context.Polikliniks == null)
             {
-                return Problem("Entity set 'hospitalContext.Polikliniks' is null.");
+                return Problem("Entity set 'hospitalContext.Polikliniks'  is null.");
             }
-
             var poliklinik = await _context.Polikliniks.FindAsync(id);
-
-            if (poliklinik == null)
+            if (poliklinik != null)
             {
-                return NotFound();
+                _context.Polikliniks.Remove(poliklinik);
             }
-
-            // İlgili doktorları bul ve sil
-            var doktorlar = _context.Doktors.Where(d => d.PoliklinikId == id).ToList();
-
-            foreach (var doktor in doktorlar)
-            {
-                // İlgili doktoru ve ona bağlı verileri sil
-                await _doktorController.DeleteConfirmed(doktor.DoktorId);
-            }
-            _context.Polikliniks.Remove(poliklinik);
+            
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
 

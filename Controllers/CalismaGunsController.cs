@@ -147,14 +147,28 @@ namespace HospitalAppointmentSystem.Controllers
         {
             if (_context.CalismaGuns == null)
             {
-                return Problem("Entity set 'hospitalContext.CalismaGuns'  is null.");
+                return Problem("Entity set 'hospitalContext.CalismaGuns' is null.");
             }
+
             var calismaGun = await _context.CalismaGuns.FindAsync(id);
-            if (calismaGun != null)
+            if (calismaGun == null)
             {
-                _context.CalismaGuns.Remove(calismaGun);
+                return NotFound();
             }
-            
+
+            // Delete related appointments
+            var relatedAppointments = _context.Randevus
+                .Where(r => r.DoktorId == calismaGun.DoktorId && r.RandevuTarihiSaat.Date == calismaGun.Gun)
+                .ToList();
+
+            foreach (var appointment in relatedAppointments)
+            {
+                _context.Randevus.Remove(appointment);
+            }
+
+            // Remove the working day
+            _context.CalismaGuns.Remove(calismaGun);
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
