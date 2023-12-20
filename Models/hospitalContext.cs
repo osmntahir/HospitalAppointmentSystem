@@ -29,7 +29,7 @@ namespace HospitalAppointmentSystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-             
+
             }
         }
 
@@ -39,7 +39,9 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("Admin");
 
-                entity.Property(e => e.AdminId).HasColumnName("AdminID");
+                entity.Property(e => e.AdminId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("AdminID");
 
                 entity.Property(e => e.Password).HasMaxLength(255);
 
@@ -50,7 +52,9 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("AnaBilimDali");
 
-                entity.Property(e => e.AnaBilimDaliId).HasColumnName("AnaBilimDaliID");
+                entity.Property(e => e.AnaBilimDaliId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("AnaBilimDaliID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
             });
@@ -59,7 +63,9 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("CalismaGun");
 
-                entity.Property(e => e.CalismaGunId).HasColumnName("CalismaGunID");
+                entity.Property(e => e.CalismaGunId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("CalismaGunID");
 
                 entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
 
@@ -70,14 +76,16 @@ namespace HospitalAppointmentSystem.Models
                 entity.HasOne(d => d.Doktor)
                     .WithMany(p => p.CalismaGuns)
                     .HasForeignKey(d => d.DoktorId)
-                    .HasConstraintName("FK__CalismaGu__Dokto__4B0D20AB");
+                    .HasConstraintName("FK__CalismaGu__Dokto__75035A77");
             });
 
             modelBuilder.Entity<Doktor>(entity =>
             {
                 entity.ToTable("Doktor");
 
-                entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
+                entity.Property(e => e.DoktorId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("DoktorID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
 
@@ -100,13 +108,13 @@ namespace HospitalAppointmentSystem.Models
                 entity.HasOne(d => d.Poliklinik)
                     .WithMany(p => p.Doktors)
                     .HasForeignKey(d => d.PoliklinikId)
-                    .HasConstraintName("FK__Doktor__Poliklin__4830B400");
+                    .HasConstraintName("FK__Doktor__Poliklin__7226EDCC");
             });
 
             modelBuilder.Entity<HastaLogin>(entity =>
             {
                 entity.HasKey(e => e.HastaId)
-                    .HasName("PK__HastaLog__114C5CAB5DB8A9F4");
+                    .HasName("PK__HastaLog__114C5CABFD804FA1");
 
                 entity.ToTable("HastaLogin");
 
@@ -127,9 +135,11 @@ namespace HospitalAppointmentSystem.Models
             modelBuilder.Entity<Hastum>(entity =>
             {
                 entity.HasKey(e => e.HastaId)
-                    .HasName("PK__Hasta__114C5CABE471AD94");
+                    .HasName("PK__Hasta__114C5CAB7EB1DB94");
 
-                entity.Property(e => e.HastaId).HasColumnName("HastaID");
+                entity.Property(e => e.HastaId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("HastaID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
 
@@ -148,7 +158,9 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("Poliklinik");
 
-                entity.Property(e => e.PoliklinikId).HasColumnName("PoliklinikID");
+                entity.Property(e => e.PoliklinikId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("PoliklinikID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
 
@@ -157,14 +169,16 @@ namespace HospitalAppointmentSystem.Models
                 entity.HasOne(d => d.AnaBilimDali)
                     .WithMany(p => p.Polikliniks)
                     .HasForeignKey(d => d.AnaBilimDaliId)
-                    .HasConstraintName("FK__Poliklini__AnaBi__45544755");
+                    .HasConstraintName("FK__Poliklini__AnaBi__6F4A8121");
             });
 
             modelBuilder.Entity<Randevu>(entity =>
             {
                 entity.ToTable("Randevu");
 
-                entity.Property(e => e.RandevuId).HasColumnName("RandevuID");
+                entity.Property(e => e.RandevuId)
+                    .ValueGeneratedNever()
+                    .HasColumnName("RandevuID");
 
                 entity.Property(e => e.Aciklama).HasMaxLength(500);
 
@@ -177,12 +191,12 @@ namespace HospitalAppointmentSystem.Models
                 entity.HasOne(d => d.Doktor)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.DoktorId)
-                    .HasConstraintName("FK__Randevu__DoktorI__4FD1D5C8");
+                    .HasConstraintName("FK__Randevu__DoktorI__79C80F94");
 
                 entity.HasOne(d => d.Hasta)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.HastaId)
-                    .HasConstraintName("FK__Randevu__HastaID__50C5FA01");
+                    .HasConstraintName("FK__Randevu__HastaID__7ABC33CD");
             });
 
             OnModelCreatingPartial(modelBuilder);
