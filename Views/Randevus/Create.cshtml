@@ -22,8 +22,9 @@
                 <select asp-for="DoktorId" class ="form-control" asp-items="ViewBag.DoktorId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="HastaId" class="control-label"></label>
-                <select asp-for="HastaId" class ="form-control" asp-items="ViewBag.HastaId"></select>
+                <label asp-for="KullaniciId" class="control-label"></label>
+                <input asp-for="KullaniciId" class="form-control" />
+                <span asp-validation-for="KullaniciId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="RandevuTarihiSaat" class="control-label"></label>

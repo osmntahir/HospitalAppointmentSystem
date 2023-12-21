@@ -21,7 +21,7 @@ namespace HospitalAppointmentSystem.Controllers
         // GET: Randevus
         public async Task<IActionResult> Index()
         {
-            var hospitalContext = _context.Randevus.Include(r => r.Doktor).Include(r => r.Hasta);
+            var hospitalContext = _context.Randevus.Include(r => r.Doktor);
             return View(await hospitalContext.ToListAsync());
         }
 
@@ -35,7 +35,6 @@ namespace HospitalAppointmentSystem.Controllers
 
             var randevu = await _context.Randevus
                 .Include(r => r.Doktor)
-                .Include(r => r.Hasta)
                 .FirstOrDefaultAsync(m => m.RandevuId == id);
             if (randevu == null)
             {
@@ -49,7 +48,6 @@ namespace HospitalAppointmentSystem.Controllers
         public IActionResult Create()
         {
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId");
-            ViewData["HastaId"] = new SelectList(_context.Hasta, "HastaId", "HastaId");
             return View();
         }
 
@@ -58,7 +56,7 @@ namespace HospitalAppointmentSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RandevuId,DoktorId,HastaId,RandevuTarihiSaat,Aciklama")] Randevu randevu)
+        public async Task<IActionResult> Create([Bind("RandevuId,DoktorId,KullaniciId,RandevuTarihiSaat,Aciklama")] Randevu randevu)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +65,6 @@ namespace HospitalAppointmentSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", randevu.DoktorId);
-            ViewData["HastaId"] = new SelectList(_context.Hasta, "HastaId", "HastaId", randevu.HastaId);
             return View(randevu);
         }
 
@@ -85,7 +82,6 @@ namespace HospitalAppointmentSystem.Controllers
                 return NotFound();
             }
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", randevu.DoktorId);
-            ViewData["HastaId"] = new SelectList(_context.Hasta, "HastaId", "HastaId", randevu.HastaId);
             return View(randevu);
         }
 
@@ -94,7 +90,7 @@ namespace HospitalAppointmentSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RandevuId,DoktorId,HastaId,RandevuTarihiSaat,Aciklama")] Randevu randevu)
+        public async Task<IActionResult> Edit(int id, [Bind("RandevuId,DoktorId,KullaniciId,RandevuTarihiSaat,Aciklama")] Randevu randevu)
         {
             if (id != randevu.RandevuId)
             {
@@ -122,7 +118,6 @@ namespace HospitalAppointmentSystem.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", randevu.DoktorId);
-            ViewData["HastaId"] = new SelectList(_context.Hasta, "HastaId", "HastaId", randevu.HastaId);
             return View(randevu);
         }
 
@@ -136,7 +131,6 @@ namespace HospitalAppointmentSystem.Controllers
 
             var randevu = await _context.Randevus
                 .Include(r => r.Doktor)
-                .Include(r => r.Hasta)
                 .FirstOrDefaultAsync(m => m.RandevuId == id);
             if (randevu == null)
             {

@@ -11,10 +11,8 @@ namespace HospitalAppointmentSystem.Models
         }
 
         public int PoliklinikId { get; set; }
-        public int? AnaBilimDaliId { get; set; }
         public string Adi { get; set; } = null!;
 
-        public virtual AnaBilimDali? AnaBilimDali { get; set; }
         public virtual ICollection<Doktor> Doktors { get; set; }
     }
 }

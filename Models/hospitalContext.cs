@@ -16,12 +16,9 @@ namespace HospitalAppointmentSystem.Models
         {
         }
 
-        public virtual DbSet<Admin> Admins { get; set; } = null!;
-        public virtual DbSet<AnaBilimDali> AnaBilimDalis { get; set; } = null!;
         public virtual DbSet<CalismaGun> CalismaGuns { get; set; } = null!;
         public virtual DbSet<Doktor> Doktors { get; set; } = null!;
-        public virtual DbSet<HastaLogin> HastaLogins { get; set; } = null!;
-        public virtual DbSet<Hastum> Hasta { get; set; } = null!;
+        public virtual DbSet<Kullanici> Hasta { get; set; } = null!;
         public virtual DbSet<Poliklinik> Polikliniks { get; set; } = null!;
         public virtual DbSet<Randevu> Randevus { get; set; } = null!;
 
@@ -29,35 +26,12 @@ namespace HospitalAppointmentSystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
+
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Admin>(entity =>
-            {
-                entity.ToTable("Admin");
-
-                entity.Property(e => e.AdminId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("AdminID");
-
-                entity.Property(e => e.Password).HasMaxLength(255);
-
-                entity.Property(e => e.UserName).HasMaxLength(255);
-            });
-
-            modelBuilder.Entity<AnaBilimDali>(entity =>
-            {
-                entity.ToTable("AnaBilimDali");
-
-                entity.Property(e => e.AnaBilimDaliId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("AnaBilimDaliID");
-
-                entity.Property(e => e.Adi).HasMaxLength(255);
-            });
-
             modelBuilder.Entity<CalismaGun>(entity =>
             {
                 entity.ToTable("CalismaGun");
@@ -112,33 +86,12 @@ namespace HospitalAppointmentSystem.Models
                     .HasConstraintName("FK__Doktor__Poliklin__1758727B");
             });
 
-            modelBuilder.Entity<HastaLogin>(entity =>
+            modelBuilder.Entity<Kullanici>(entity =>
             {
-                entity.HasKey(e => e.HastaId)
-                    .HasName("PK__HastaLog__114C5CAB5336FFA0");
+                entity.HasKey(e => e.KullaniciId)
+                    .HasName("PK__Hasta__114C5CABA617346D");
 
-                entity.ToTable("HastaLogin");
-
-                entity.Property(e => e.HastaId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("HastaID");
-
-                entity.Property(e => e.Password).HasMaxLength(255);
-
-                entity.Property(e => e.UserName).HasMaxLength(255);
-
-                entity.HasOne(d => d.Hasta)
-                    .WithOne(p => p.HastaLogin)
-                    .HasForeignKey<HastaLogin>(d => d.HastaId)
-                    .HasConstraintName("FK_HastaLogin_Hasta");
-            });
-
-            modelBuilder.Entity<Hastum>(entity =>
-            {
-                entity.HasKey(e => e.HastaId)
-                    .HasName("PK__Hasta__114C5CAB7887A226");
-
-                entity.Property(e => e.HastaId)
+                entity.Property(e => e.KullaniciId)
                     .ValueGeneratedNever()
                     .HasColumnName("HastaID");
 
@@ -148,7 +101,17 @@ namespace HospitalAppointmentSystem.Models
 
                 entity.Property(e => e.DogumTarihi).HasColumnType("date");
 
-                entity.Property(e => e.Email).HasMaxLength(255);
+                entity.Property(e => e.Email)
+                    .HasMaxLength(50)
+                    .HasColumnName("email");
+
+                entity.Property(e => e.KullaniciRol)
+                    .HasMaxLength(2)
+                    .HasDefaultValueSql("('U')");
+
+                entity.Property(e => e.Sifre)
+                    .HasMaxLength(50)
+                    .HasColumnName("sifre");
 
                 entity.Property(e => e.Soyadi).HasMaxLength(255);
 
@@ -164,14 +127,6 @@ namespace HospitalAppointmentSystem.Models
                     .HasColumnName("PoliklinikID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
-
-                entity.Property(e => e.AnaBilimDaliId).HasColumnName("AnaBilimDaliID");
-
-                entity.HasOne(d => d.AnaBilimDali)
-                    .WithMany(p => p.Polikliniks)
-                    .HasForeignKey(d => d.AnaBilimDaliId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Poliklini__AnaBi__147C05D0");
             });
 
             modelBuilder.Entity<Randevu>(entity =>
@@ -186,8 +141,6 @@ namespace HospitalAppointmentSystem.Models
 
                 entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
 
-                entity.Property(e => e.HastaId).HasColumnName("HastaID");
-
                 entity.Property(e => e.RandevuTarihiSaat).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Doktor)
@@ -195,12 +148,6 @@ namespace HospitalAppointmentSystem.Models
                     .HasForeignKey(d => d.DoktorId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__Randevu__DoktorI__1EF99443");
-
-                entity.HasOne(d => d.Hasta)
-                    .WithMany(p => p.Randevus)
-                    .HasForeignKey(d => d.HastaId)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__HastaID__1FEDB87C");
             });
 
             OnModelCreatingPartial(modelBuilder);

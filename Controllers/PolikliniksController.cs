@@ -21,8 +21,9 @@ namespace HospitalAppointmentSystem.Controllers
         // GET: Polikliniks
         public async Task<IActionResult> Index()
         {
-            var hospitalContext = _context.Polikliniks.Include(p => p.AnaBilimDali);
-            return View(await hospitalContext.ToListAsync());
+              return _context.Polikliniks != null ? 
+                          View(await _context.Polikliniks.ToListAsync()) :
+                          Problem("Entity set 'hospitalContext.Polikliniks'  is null.");
         }
 
         // GET: Polikliniks/Details/5
@@ -34,7 +35,6 @@ namespace HospitalAppointmentSystem.Controllers
             }
 
             var poliklinik = await _context.Polikliniks
-                .Include(p => p.AnaBilimDali)
                 .FirstOrDefaultAsync(m => m.PoliklinikId == id);
             if (poliklinik == null)
             {
@@ -47,7 +47,6 @@ namespace HospitalAppointmentSystem.Controllers
         // GET: Polikliniks/Create
         public IActionResult Create()
         {
-            ViewData["AnaBilimDaliId"] = new SelectList(_context.AnaBilimDalis, "AnaBilimDaliId", "AnaBilimDaliId");
             return View();
         }
 
@@ -56,7 +55,7 @@ namespace HospitalAppointmentSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PoliklinikId,AnaBilimDaliId,Adi")] Poliklinik poliklinik)
+        public async Task<IActionResult> Create([Bind("PoliklinikId,Adi")] Poliklinik poliklinik)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +63,6 @@ namespace HospitalAppointmentSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnaBilimDaliId"] = new SelectList(_context.AnaBilimDalis, "AnaBilimDaliId", "AnaBilimDaliId", poliklinik.AnaBilimDaliId);
             return View(poliklinik);
         }
 
@@ -81,7 +79,6 @@ namespace HospitalAppointmentSystem.Controllers
             {
                 return NotFound();
             }
-            ViewData["AnaBilimDaliId"] = new SelectList(_context.AnaBilimDalis, "AnaBilimDaliId", "AnaBilimDaliId", poliklinik.AnaBilimDaliId);
             return View(poliklinik);
         }
 
@@ -90,7 +87,7 @@ namespace HospitalAppointmentSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("PoliklinikId,AnaBilimDaliId,Adi")] Poliklinik poliklinik)
+        public async Task<IActionResult> Edit(int id, [Bind("PoliklinikId,Adi")] Poliklinik poliklinik)
         {
             if (id != poliklinik.PoliklinikId)
             {
@@ -117,7 +114,6 @@ namespace HospitalAppointmentSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AnaBilimDaliId"] = new SelectList(_context.AnaBilimDalis, "AnaBilimDaliId", "AnaBilimDaliId", poliklinik.AnaBilimDaliId);
             return View(poliklinik);
         }
 
@@ -130,7 +126,6 @@ namespace HospitalAppointmentSystem.Controllers
             }
 
             var poliklinik = await _context.Polikliniks
-                .Include(p => p.AnaBilimDali)
                 .FirstOrDefaultAsync(m => m.PoliklinikId == id);
             if (poliklinik == null)
             {
