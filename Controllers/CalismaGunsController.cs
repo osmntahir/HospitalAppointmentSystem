@@ -31,6 +31,9 @@ namespace HospitalAppointmentSystem.Controllers
             if (id == null || _context.CalismaGuns == null)
             {
                 return NotFound();
+
+
+
             }
 
             var calismaGun = await _context.CalismaGuns
