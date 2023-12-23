@@ -12,5 +12,6 @@ namespace HospitalAppointmentSystem.Models
         public string? Aciklama { get; set; }
 
         public virtual Doktor? Doktor { get; set; }
+        public virtual Kullanici? Kullanici { get; set; }
     }
 }
