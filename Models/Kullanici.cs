@@ -18,6 +18,7 @@ namespace HospitalAppointmentSystem.Models
         public string Cinsiyet { get; set; } = null!;
         public DateTime? DogumTarihi { get; set; }
         public string? TelefonNumarasi { get; set; }
+        public string? KullaniciRole { get; set; }
 
         public virtual ICollection<Randevu> Randevus { get; set; }
     }

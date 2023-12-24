@@ -1,0 +1,164 @@
+﻿@model HospitalAppointmentSystem.Models.Kullanici
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <style>
+        body {
+            background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg') fixed;
+            background-size: cover;
+        }
+
+        *[role="form"] {
+            max-width: 530px;
+            padding: 15px;
+            margin: 0 auto;
+            border-radius: 0.3em;
+            background-color: #f2f2f2;
+        }
+
+            *[role="form"] h2 {
+                font-family: 'Open Sans', sans-serif;
+                font-size: 40px;
+                font-weight: 600;
+                color: #000000;
+                margin-top: 5%;
+                text-align: center;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="registrationForm" class="form-horizontal" role="form" action="/KayitOl/Index" method="post">
+            <h2>Registration</h2>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                <div class="col-sm-9">
+                    <input type="text" id="firstName" name="Adi" placeholder="First Name" class="form-control" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                <div class="col-sm-9">
+                    <input type="text" id="lastName" name="Soyadi" placeholder="Last Name" class="form-control" autofocus>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email* </label>
+                <div class="col-sm-9">
+                    <input type="email" id="email" name="Email" placeholder="Email" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="col-sm-3 control-label">Password*</label>
+                <div class="col-sm-9">
+                    <input type="password" id="password" name="Sifre" placeholder="Password" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="passwordConfirm" class="col-sm-3 control-label">Confirm Password*</label>
+                <div class="col-sm-9">
+                    <input type="password" id="passwordConfirm" name="PasswordConfirm" placeholder="Confirm Password" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="birthDate" class="col-sm-3 control-label">Date of Birth*</label>
+                <div class="col-sm-9">
+                    <input type="date" id="birthDate" name="DogumTarihi" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
+                <div class="col-sm-9">
+                    <input type="tel" id="phoneNumber" name="TelefonNumarasi" placeholder="Phone number" class="form-control">
+                    <span class="help-block">Your phone number won't be disclosed anywhere </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-3">Gender</label>
+                <div class="col-sm-6">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label class="radio-inline">
+                                <input type="radio" id="femaleRadio" name="Cinsiyet" value="Female">Female
+                            </label>
+                        </div>
+                        <div class="col-sm-4">
+                            <label class="radio-inline">
+                                <input type="radio" id="maleRadio" name="Cinsiyet" value="Male">Male
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <span class="help-block">*Required fields</span>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+    </div>
+
+    <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <!-- jQuery Validate ve Additional Methods eklentileri -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js"></script>
+
+    <script>
+        $(function () {
+            $('#registrationForm').validate({
+                rules: {
+                    firstName: "required",
+                    lastName: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: "required",
+                    passwordConfirm: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    birthDate: "required",
+                    phoneNumber: "number",
+                    height: {
+                        required: true,
+                        number: true
+                    },
+                    weight: {
+                        required: true,
+                        number: true
+                    }
+                },
+                messages: {
+                    firstName: "Please enter your first name",
+                    lastName: "Please enter your last name",
+                    email: {
+                        required: 'Please enter your email',
+                        email: 'Please enter a valid email'
+                    },
+                    password: "Please enter your password",
+                    passwordConfirm: {
+                        required: "Please confirm your password",
+                        equalTo: "Passwords do not match"
+                    },
+                    birthDate: "Please enter your birthdate",
+                    phoneNumber: "Please enter a valid phone number",
+                }
+            });
+        });
+    </script>
+</body>
+</html>
