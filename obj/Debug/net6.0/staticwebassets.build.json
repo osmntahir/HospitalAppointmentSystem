@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ReDd4T4WVAGUmhgiCm0LzT6HIl6lKHLRF80E356pCh0=",
+  "Hash": "yw2/wP+RGNdlAMKnyHzaZ7SzogygUW1NPg0bpgb6tw8=",
   "Source": "HospitalAppointmentSystem",
   "BasePath": "_content/HospitalAppointmentSystem",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\Uye.css",
+      "SourceId": "HospitalAppointmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\",
+      "BasePath": "_content/HospitalAppointmentSystem",
+      "RelativePath": "css/Uye.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\Uye.css"
     },
     {
       "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\favicon.ico",

@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using HospitalAppointmentSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 
+
+
 namespace HospitalAppointmentSystem.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="A")]
     public class DoktorsController : Controller
     {
         private readonly hospitalContext _context;
