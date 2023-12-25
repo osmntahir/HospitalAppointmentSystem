@@ -11,8 +11,13 @@ public class KayitOlController : Controller
     {
         _context = context;
     }
-
-    [HttpGet]
+    // hospitalContext sınıfında var olan IsEmailUnique metodu
+    // hospitalContext sınıfında var olan IsEmailUnique metodu
+    public JsonResult IsEmailUnique(string email)
+    {
+        bool isUnique = !_context.Kullanicis.Any(u => u.Email == email);
+        return Json(isUnique);
+    }
     public IActionResult Index()
     {
         return View();
@@ -54,7 +59,7 @@ public class KayitOlController : Controller
 
                 // Başarılı kayıt olduktan sonra yapılacak işlemler
                 // Örneğin, giriş sayfasına yönlendirme yapılabilir.
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction("GirisYap", "Uye");
             }
             catch (Exception ex)
             {

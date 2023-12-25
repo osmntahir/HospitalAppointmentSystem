@@ -1,4 +1,5 @@
-using HospitalAppointmentSystem.Models;
+    using HospitalAppointmentSystem.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,13 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<hospitalContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("dbconn")));
+
+builder.Services.AddAuthentication
+    (CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(ayar =>
+    {
+    ayar.LoginPath = "/Uye/GirisYap";
+    }
+    );
 
 var app = builder.Build();
 
@@ -25,6 +33,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

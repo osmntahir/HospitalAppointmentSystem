@@ -1,0 +1,30 @@
+﻿@model HospitalAppointmentSystem.Models.Kullanici;
+@{
+    ViewData["Title"] = "GirisYap";
+}
+<h1>Giris Yap</h1>
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="https://files.sikayetvar.com/lg/cmp/18/18354.png?1522650125" id="icon" alt="User Icon" />
+        </div>
+
+        <!-- Login Form -->
+        <form method="post">
+            <input type="text" id="Email" class="fadeIn second" name="Email" placeholder="login">
+            <input type="password" id="Sifre" class="fadeIn third" name="Sifre" placeholder="password">
+            <input type="submit" class="fadeIn fourth" value="Giris Yap">
+        </form>
+
+        <!-- Remind Passowrd -->
+        <div id="formFooter">
+            <br />
+            <a class="btn btn-primary" href="/KayitOl">Kayit olmak istiyorum</a>
+         //   <a class="underlineHover" href="#">Sifremi unuttum</a>
+        </div>
+
+    </div>
+</div>

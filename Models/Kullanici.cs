@@ -11,7 +11,7 @@ namespace HospitalAppointmentSystem.Models
         }
 
         public int KullaniciId { get; set; }
-        public string? Email { get; set; }
+        public string Email { get; set; } = null!;
         public string Sifre { get; set; } = null!;
         public string Adi { get; set; } = null!;
         public string Soyadi { get; set; } = null!;

@@ -1,12 +1,12 @@
 ﻿@model HospitalAppointmentSystem.Models.Kullanici
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Kayıt</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <style>
@@ -38,62 +38,62 @@
 <body>
     <div class="container">
         <form id="registrationForm" class="form-horizontal" role="form" action="/KayitOl/Index" method="post">
-            <h2>Registration</h2>
+            <h2>Kayıt</h2>
             <div class="form-group">
-                <label for="firstName" class="col-sm-3 control-label">First Name</label>
+                <label for="firstName" class="col-sm-3 control-label">Ad</label>
                 <div class="col-sm-9">
-                    <input type="text" id="firstName" name="Adi" placeholder="First Name" class="form-control" autofocus>
+                    <input type="text" id="firstName" name="Adi" placeholder="Ad" class="form-control" autofocus>
                 </div>
             </div>
             <div class="form-group">
-                <label for="lastName" class="col-sm-3 control-label">Last Name</label>
+                <label for="lastName" class="col-sm-3 control-label">Soyad</label>
                 <div class="col-sm-9">
-                    <input type="text" id="lastName" name="Soyadi" placeholder="Last Name" class="form-control" autofocus>
+                    <input type="text" id="lastName" name="Soyadi" placeholder="Soyad" class="form-control" autofocus>
                 </div>
             </div>
             <div class="form-group">
-                <label for="email" class="col-sm-3 control-label">Email* </label>
+                <label for="email" class="col-sm-3 control-label">E-posta* </label>
                 <div class="col-sm-9">
-                    <input type="email" id="email" name="Email" placeholder="Email" class="form-control" required>
+                    <input type="email" id="email" name="Email" placeholder="E-posta" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="password" class="col-sm-3 control-label">Password*</label>
+                <label for="password" class="col-sm-3 control-label">Şifre*</label>
                 <div class="col-sm-9">
-                    <input type="password" id="password" name="Sifre" placeholder="Password" class="form-control" required>
+                    <input type="password" id="password" name="Sifre" placeholder="Şifre" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="passwordConfirm" class="col-sm-3 control-label">Confirm Password*</label>
+                <label for="passwordConfirm" class="col-sm-3 control-label">Şifreyi Onayla*</label>
                 <div class="col-sm-9">
-                    <input type="password" id="passwordConfirm" name="PasswordConfirm" placeholder="Confirm Password" class="form-control" required>
+                    <input type="password" id="passwordConfirm" name="PasswordConfirm" placeholder="Şifreyi Onayla" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="birthDate" class="col-sm-3 control-label">Date of Birth*</label>
+                <label for="birthDate" class="col-sm-3 control-label">Doğum Tarihi*</label>
                 <div class="col-sm-9">
                     <input type="date" id="birthDate" name="DogumTarihi" class="form-control" required>
                 </div>
             </div>
             <div class="form-group">
-                <label for="phoneNumber" class="col-sm-3 control-label">Phone number </label>
+                <label for="phoneNumber" class="col-sm-3 control-label">Telefon Numarası </label>
                 <div class="col-sm-9">
-                    <input type="tel" id="phoneNumber" name="TelefonNumarasi" placeholder="Phone number" class="form-control">
-                    <span class="help-block">Your phone number won't be disclosed anywhere </span>
+                    <input type="tel" id="phoneNumber" name="TelefonNumarasi" placeholder="Telefon Numarası" class="form-control">
+                    <span class="help-block">Telefon numaranız başka bir yerde açıklanmayacaktır</span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-3">Gender</label>
+                <label class="control-label col-sm-3">Cinsiyet</label>
                 <div class="col-sm-6">
                     <div class="row">
                         <div class="col-sm-4">
                             <label class="radio-inline">
-                                <input type="radio" id="femaleRadio" name="Cinsiyet" value="Female">Female
+                                <input type="radio" id="femaleRadio" name="Cinsiyet" value="Female">Kadın
                             </label>
                         </div>
                         <div class="col-sm-4">
                             <label class="radio-inline">
-                                <input type="radio" id="maleRadio" name="Cinsiyet" value="Male">Male
+                                <input type="radio" id="maleRadio" name="Cinsiyet" value="Male">Erkek
                             </label>
                         </div>
                     </div>
@@ -101,10 +101,10 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-9 col-sm-offset-3">
-                    <span class="help-block">*Required fields</span>
+                    <span class="help-block">*Zorunlu alanlar</span>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
+            <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
         </form>
     </div>
 
@@ -124,7 +124,22 @@
                     lastName: "required",
                     email: {
                         required: true,
-                        email: true
+                        email: true,
+                        remote: {
+                            url: "/KayitOl/IsEmailUnique",
+                            type: "post",
+                            data: {
+                                email: function () {
+                                    return $("#email").val();
+                                }
+                            },
+                            complete: function (data) {
+                                if (data.responseText === "false") {
+                                    $('#email').val('');
+                                    alert('Bu e-posta zaten kayıtlı. Lütfen farklı bir e-posta girin.');
+                                }
+                            }
+                        }
                     },
                     password: "required",
                     passwordConfirm: {
@@ -143,22 +158,29 @@
                     }
                 },
                 messages: {
-                    firstName: "Please enter your first name",
-                    lastName: "Please enter your last name",
+                    firstName: "Lütfen adınızı girin",
+                    lastName: "Lütfen soyadınızı girin",
                     email: {
-                        required: 'Please enter your email',
-                        email: 'Please enter a valid email'
+                        required: 'Lütfen e-posta adresinizi girin',
+                        email: 'Lütfen geçerli bir e-posta adresi girin',
+                        remote: 'Bu e-posta zaten kayıtlı. Lütfen farklı bir e-posta girin.'
                     },
-                    password: "Please enter your password",
+                    password: "Lütfen şifrenizi girin",
                     passwordConfirm: {
-                        required: "Please confirm your password",
-                        equalTo: "Passwords do not match"
+                        required: "Lütfen şifrenizi onaylayın",
+                        equalTo: "Şifreler eşleşmiyor"
                     },
-                    birthDate: "Please enter your birthdate",
-                    phoneNumber: "Please enter a valid phone number",
+                    birthDate: "Lütfen doğum tarihinizi girin",
+                    phoneNumber: "Lütfen geçerli bir telefon numarası girin",
+                },
+                submitHandler: function (form) {
+                    // Kayıt işlemleri tamamlandıktan sonra yapılacak işlemler
+                    // Örneğin, kullanıcıyı login sayfasına yönlendirme:
+                    window.location.href = "/Uye/GirisYap";
                 }
             });
         });
     </script>
+
 </body>
 </html>
