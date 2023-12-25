@@ -32,7 +32,8 @@ namespace HospitalAppointmentSystem.Controllers
             {
                 var talepler = new List<Claim>()
                 {
-                    new Claim(ClaimTypes.Name,k.Email.ToString())
+                    new Claim(ClaimTypes.Name,k.Email.ToString()),
+                    new Claim(ClaimTypes.Role, kullanici.KullaniciRole), // Add role information
                 };
                 ClaimsIdentity kimlik = new ClaimsIdentity(talepler, "Login");
                 ClaimsPrincipal kural = new ClaimsPrincipal(kimlik);
