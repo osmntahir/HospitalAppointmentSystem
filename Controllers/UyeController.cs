@@ -14,6 +14,11 @@ namespace HospitalAppointmentSystem.Controllers
         }
         public IActionResult GirisYap()
         {
+            ClaimsPrincipal claimUser = HttpContext.User;
+
+            if (claimUser.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return View();
         }
         [HttpPost]

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAppointmentSystem.Controllers
 {
-    [Authorize(Roles ="A")]
+    [Authorize]
     public class DoktorsController : Controller
     {
         private readonly hospitalContext _context;
