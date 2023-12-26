@@ -1,8 +1,13 @@
 ﻿@model HospitalAppointmentSystem.Models.Kullanici;
 @{
+    Layout = null;
+}
+
+@{
     ViewData["Title"] = "GirisYap";
 }
-<link href="~/css/uye.css" rel="stylesheet" />
+
+<link href="~/css/GirisYap.css" rel="stylesheet" />
 <h1>Giris Yap</h1>
 
 <div class="wrapper fadeInDown">
@@ -23,8 +28,8 @@
         <!-- Remind Passowrd -->
         <div id="formFooter">
             <br />
-            <a class="btn btn-primary" href="/KayitOl">Kayit olmak istiyorum</a>
-         //   <a class="underlineHover" href="#">Sifremi unuttum</a>
+            <a class="btn btn-primary" asp-controller ="KayitOl" asp-action="Index">Kayit olmak istiyorum</a>
+        
         </div>
 
     </div>

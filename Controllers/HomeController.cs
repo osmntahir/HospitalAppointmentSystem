@@ -1,9 +1,12 @@
 ﻿using HospitalAppointmentSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Configuration;
 using System.Diagnostics;
 
 namespace HospitalAppointmentSystem.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

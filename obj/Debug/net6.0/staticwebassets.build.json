@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yw2/wP+RGNdlAMKnyHzaZ7SzogygUW1NPg0bpgb6tw8=",
+  "Hash": "Zisn2bvlxvtH1PZvbSFHVHsfOYBmlkIU+KBnjanO8ss=",
   "Source": "HospitalAppointmentSystem",
   "BasePath": "_content/HospitalAppointmentSystem",
   "Mode": "Default",
@@ -55,6 +55,25 @@
       "OriginalItemSpec": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HospitalAppointmentSystem.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\GirisYap.css",
+      "SourceId": "HospitalAppointmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\",
+      "BasePath": "_content/HospitalAppointmentSystem",
+      "RelativePath": "css/GirisYap.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\GirisYap.css"
+    },
+    {
       "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\site.css",
       "SourceId": "HospitalAppointmentSystem",
       "SourceType": "Discovered",
@@ -72,25 +91,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
-    },
-    {
-      "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\Uye.css",
-      "SourceId": "HospitalAppointmentSystem",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\",
-      "BasePath": "_content/HospitalAppointmentSystem",
-      "RelativePath": "css/Uye.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\Uye.css"
     },
     {
       "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\favicon.ico",
