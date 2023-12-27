@@ -2,16 +2,21 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace HospitalAppointmentSystem.Controllers
 {
     public class UyeController : Controller
     {
-        hospitalContext db;
-        public UyeController(hospitalContext context) {
-          db = context;
+        private readonly hospitalContext db;
+
+        public UyeController(hospitalContext context)
+        {
+            db = context;
         }
+
         public IActionResult GirisYap()
         {
             ClaimsPrincipal claimUser = HttpContext.User;
@@ -21,24 +26,27 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View();
         }
-        [HttpPost]
-        public async Task<IActionResult> GirisYap(Kullanici k , string ReturnUrl)
-        {
-          //  hospitalContext db = new hospitalContext();
-            var kullanici = db.Kullanicis.FirstOrDefault(x=>x.Email == k.Email &&
-            x.Sifre==k.Sifre);
 
-            if (kullanici != null) // boyle bir kullanici var
+        [HttpPost]
+        public async Task<IActionResult> GirisYap(Kullanici k, string ReturnUrl)
+        {
+            var kullanici = db.Kullanicis.FirstOrDefault(x => x.Email == k.Email && x.Sifre == k.Sifre);
+
+            if (kullanici != null)
             {
-                var talepler = new List<Claim>()
+                var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name,k.Email.ToString()),
-                    new Claim(ClaimTypes.Role, kullanici.KullaniciRole), // Add role information
+                    new Claim(ClaimTypes.Name, kullanici.KullaniciId.ToString()), // Include user ID in claims
+                    new Claim(ClaimTypes.Email, k.Email),
+                    new Claim(ClaimTypes.Role, kullanici.KullaniciRole),
                 };
-                ClaimsIdentity kimlik = new ClaimsIdentity(talepler, "Login");
-                ClaimsPrincipal kural = new ClaimsPrincipal(kimlik);
-                await HttpContext.SignInAsync(kural);
-                if (!String.IsNullOrEmpty(ReturnUrl))
+
+                ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+
+                await HttpContext.SignInAsync(principal);
+
+                if (!string.IsNullOrEmpty(ReturnUrl))
                 {
                     return Redirect(ReturnUrl);
                 }
@@ -50,10 +58,10 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View();
         }
+
         public async Task<IActionResult> CikisYap()
         {
-            await HttpContext.SignOutAsync
-                (CookieAuthenticationDefaults.AuthenticationScheme);
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("GirisYap", "Uye");
         }
     }

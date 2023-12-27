@@ -1,0 +1,48 @@
+﻿@model HospitalAppointmentSystem.Models.Randevu
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Randevu</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RandevuTarihiSaat)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RandevuTarihiSaat)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Aciklama)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Aciklama)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Doktor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Doktor.DoktorId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Kullanici)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Kullanici.KullaniciId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Poliklinik)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Poliklinik.PoliklinikId)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.RandevuId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

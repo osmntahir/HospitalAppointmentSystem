@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Zisn2bvlxvtH1PZvbSFHVHsfOYBmlkIU+KBnjanO8ss=",
+  "Hash": "BrsII6vy5h1QJwMIRPyBDLQCnqgvGs1LVaeTSpWj+BI=",
   "Source": "HospitalAppointmentSystem",
   "BasePath": "_content/HospitalAppointmentSystem",
   "Mode": "Default",
@@ -110,6 +110,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\js\\Randevu.js",
+      "SourceId": "HospitalAppointmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\",
+      "BasePath": "_content/HospitalAppointmentSystem",
+      "RelativePath": "js/Randevu.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\Randevu.js"
     },
     {
       "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\js\\site.js",

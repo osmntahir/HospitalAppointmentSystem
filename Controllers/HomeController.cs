@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace HospitalAppointmentSystem.Controllers
 {
-    [Authorize]
+  
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

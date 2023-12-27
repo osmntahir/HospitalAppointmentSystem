@@ -26,8 +26,7 @@ namespace HospitalAppointmentSystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-39QEI7I; Database=hospital; Trusted_Connection=True;");
+
             }
         }
 
@@ -135,19 +134,26 @@ namespace HospitalAppointmentSystem.Models
 
                 entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
 
+                entity.Property(e => e.PoliklinikId).HasColumnName("PoliklinikID");
+
                 entity.Property(e => e.RandevuTarihiSaat).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Doktor)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.DoktorId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__DoktorI__49AEE81E");
+                    .HasConstraintName("FK__Randevu__DoktorI__505BE5AD");
 
                 entity.HasOne(d => d.Kullanici)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.KullaniciId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__Kullani__4AA30C57");
+                    .HasConstraintName("FK__Randevu__Kullani__515009E6");
+
+                entity.HasOne(d => d.Poliklinik)
+                    .WithMany(p => p.Randevus)
+                    .HasForeignKey(d => d.PoliklinikId)
+                    .HasConstraintName("FK__Randevu__Polikli__52442E1F");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\js\\Randevu.js",
+      "PackagePath": "staticwebassets\\js\\Randevu.js"
+    },
+    {
       "Id": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

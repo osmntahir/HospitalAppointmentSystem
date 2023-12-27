@@ -1,5 +1,9 @@
 ﻿ 
  @model HospitalAppointmentSystem.Models.KullaniciKaydi
+@{
+    Layout = null;
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,6 +110,7 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Kayıt Ol</button>
+            <a class="btn btn-danger" asp-controller="Uye" asp-action="GirisYap">Giris Yap</a>
         </form>
     </div>
 

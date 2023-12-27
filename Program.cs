@@ -37,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Uye}/{action=GirisYap}/{id?}");
+    pattern: "{controller=RandevuAl}/{action=Index}/{id?}");
 
 app.Run();

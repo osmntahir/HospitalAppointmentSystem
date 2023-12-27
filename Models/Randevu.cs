@@ -6,6 +6,7 @@ namespace HospitalAppointmentSystem.Models
     public partial class Randevu
     {
         public int RandevuId { get; set; }
+        public int? PoliklinikId { get; set; }
         public int? DoktorId { get; set; }
         public int? KullaniciId { get; set; }
         public DateTime RandevuTarihiSaat { get; set; }
@@ -13,5 +14,6 @@ namespace HospitalAppointmentSystem.Models
 
         public virtual Doktor? Doktor { get; set; }
         public virtual Kullanici? Kullanici { get; set; }
+        public virtual Poliklinik? Poliklinik { get; set; }
     }
 }
