@@ -12,12 +12,7 @@ public class KayitOlController : Controller
         _context = context;
     }
     // hospitalContext sınıfında var olan IsEmailUnique metodu
-    // hospitalContext sınıfında var olan IsEmailUnique metodu
-    public JsonResult IsEmailUnique(string email)
-    {
-        bool isUnique = !_context.Kullanicis.Any(u => u.Email == email);
-        return Json(isUnique);
-    }
+ 
     public IActionResult Index()
     {
         return View();
@@ -26,7 +21,7 @@ public class KayitOlController : Controller
     // POST: KayitOl
     [HttpPost]
 
-    public IActionResult Index(Kullanici viewModel)
+    public IActionResult Index(KullaniciKaydi viewModel)
     {
         if (ModelState.IsValid)
         {

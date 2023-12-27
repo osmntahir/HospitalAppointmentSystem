@@ -26,7 +26,8 @@ namespace HospitalAppointmentSystem.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-39QEI7I; Database=hospital; Trusted_Connection=True;");
             }
         }
 
@@ -50,7 +51,7 @@ namespace HospitalAppointmentSystem.Models
                     .WithMany(p => p.CalismaGuns)
                     .HasForeignKey(d => d.DoktorId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__CalismaGu__Dokto__52793849");
+                    .HasConstraintName("FK__CalismaGu__Dokto__43F60EC8");
             });
 
             modelBuilder.Entity<Doktor>(entity =>
@@ -83,15 +84,12 @@ namespace HospitalAppointmentSystem.Models
                     .WithMany(p => p.Doktors)
                     .HasForeignKey(d => d.PoliklinikId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Doktor__Poliklin__4F9CCB9E");
+                    .HasConstraintName("FK__Doktor__Poliklin__4119A21D");
             });
 
             modelBuilder.Entity<Kullanici>(entity =>
             {
                 entity.ToTable("Kullanici");
-
-                entity.HasIndex(e => e.Email, "UQ__Kullanic__A9D10534A5EF3B2B")
-                    .IsUnique();
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
 
@@ -101,7 +99,11 @@ namespace HospitalAppointmentSystem.Models
 
                 entity.Property(e => e.Email).HasMaxLength(255);
 
-                entity.Property(e => e.KullaniciRole).HasMaxLength(50);
+                entity.Property(e => e.KullaniciRole)
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .HasDefaultValueSql("('U')")
+                    .IsFixedLength();
 
                 entity.Property(e => e.Sifre)
                     .HasMaxLength(50)
@@ -127,9 +129,7 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("Randevu");
 
-                entity.Property(e => e.RandevuId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("RandevuID");
+                entity.Property(e => e.RandevuId).HasColumnName("RandevuID");
 
                 entity.Property(e => e.Aciklama).HasMaxLength(500);
 
@@ -141,13 +141,13 @@ namespace HospitalAppointmentSystem.Models
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.DoktorId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__DoktorI__573DED66");
+                    .HasConstraintName("FK__Randevu__DoktorI__49AEE81E");
 
                 entity.HasOne(d => d.Kullanici)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.KullaniciId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__Kullani__5FD33367");
+                    .HasConstraintName("FK__Randevu__Kullani__4AA30C57");
             });
 
             OnModelCreatingPartial(modelBuilder);
