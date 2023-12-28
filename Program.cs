@@ -37,6 +37,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Randevus}/{action=Create}/{id?}");
+    pattern: "{controller=Randevu}/{action=Index}/{id?}");
 
 app.Run();

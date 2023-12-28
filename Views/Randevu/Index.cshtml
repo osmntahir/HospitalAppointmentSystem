@@ -1,0 +1,105 @@
+﻿@model HospitalAppointmentSystem.Models.Randevu
+
+<!-- Diğer HTML kodları -->
+<form asp-action="Create" asp-controller="Randevu" method="post">
+    <!-- Diğer HTML kodları -->
+
+    <div class="form-group">
+        <label asp-for="PoliklinikId" class="control-label">Poliklinik</label>
+        <select asp-for="PoliklinikId" class="form-control" asp-items="@(ViewData["PoliklinikData"] as SelectList)"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DoktorId" class="control-label">Doktor</label>
+        <select asp-for="DoktorId" class="form-control" asp-items="@(ViewData["DoktorData"] as SelectList)"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CalismaGunId" class="control-label">Çalışma Günü</label>
+        <select asp-for="CalismaGunId" class="form-control" asp-items="@(ViewData["CalismaGunData"] as SelectList)"></select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SaatId" class="control-label">Saat Dilimi</label>
+        <select asp-for="SaatId" class="form-control" asp-items="@(ViewData["SaatData"] as SelectList)"></select>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Kayıt Ol" class="btn btn-primary" />
+    </div>
+</form>
+
+<!-- Diğer HTML kodları -->
+<!-- Diğer HTML kodları -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            // Poliklinik değiştiğinde
+            $("#PoliklinikId").change(function () {
+                var poliklinikId = $(this).val();
+                $.ajax({
+                    type: "GET",
+                    url: "/Randevu/GetDoktorList",
+                    data: { poliklinikId: poliklinikId },
+                    success: function (data) {
+                        $("#DoktorId").empty();
+                        $.each(data, function (index, item) {
+                            $("#DoktorId").append('<option value="' + item.value + '">' + item.text + '</option>');
+                        });
+
+                        // Doktor değişikliğinde çalışma günlerini ve saatleri güncelle
+                        updateCalismaGunler();
+                    }
+                });
+            });
+
+            // Doktor değiştiğinde
+            $("#DoktorId").change(function () {
+                // Doktor değişikliğinde çalışma günlerini ve saatleri güncelle
+                updateCalismaGunler();
+            });
+
+            // Çalışma Günü değiştiğinde
+            $("#CalismaGunId").change(function () {
+                // Çalışma günü değişikliğinde saatleri güncelle
+                updateSaatler();
+            });
+
+            function updateCalismaGunler() {
+                var doktorId = $("#DoktorId").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/Randevu/GetCalismaGunList",
+                    data: { doktorId: doktorId },
+                    success: function (data) {
+                        $("#CalismaGunId").empty();
+                        $.each(data, function (index, item) {
+                            $("#CalismaGunId").append('<option value="' + item.value + '">' + item.text + '</option>');
+                        });
+
+                        // Çalışma günü değişikliğinde saatleri güncelle
+                        updateSaatler();
+                    }
+                });
+            }
+
+            function updateSaatler() {
+                var calismaGunId = $("#CalismaGunId").val();
+                $.ajax({
+                    type: "GET",
+                    url: "/Randevu/GetSaatList",
+                    data: { calismaGunId: calismaGunId },
+                    success: function (data) {
+                        $("#SaatId").empty();
+                        $.each(data, function (index, item) {
+                            $("#SaatId").append('<option value="' + item.value + '">' + item.text + '</option>');
+                        });
+                    }
+                });
+            }
+        });
+    </script>
+}
