@@ -1,22 +1,22 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace HospitalAppointmentSystem.Models
 {
-    public class RandevuKayit
+    public partial class RandevuKayit
     {
-        [Required(ErrorMessage = "Please select a polyclinic.")]
-        public int PoliklinikId { get; set; }
+        public int RandevuId { get; set; }
+        public int? PoliklinikId { get; set; }
+        public int? DoktorId { get; set; }
+        public int? KullaniciId { get; set; }
+        public int? CalismaGunId { get; set; }
+        public int? SaatId { get; set; }
+        public string? Aciklama { get; set; }
 
-        [Required(ErrorMessage = "Please select a doctor.")]
-        public int DoktorId { get; set; }
-
-        [Required(ErrorMessage = "Please select a working day.")]
-        public int CalismaGunID { get; set; }
-
-        [Required(ErrorMessage = "Please select a time slot.")]
-        public int SaatDilimi { get; set; }
-
-        public string Aciklama { get; set; }
+        public virtual CalismaGun? CalismaGun { get; set; }
+        public virtual Doktor? Doktor { get; set; }
+        public virtual Kullanici? Kullanici { get; set; }
+        public virtual Poliklinik? Poliklinik { get; set; }
+        public virtual Saatler? Saat { get; set; }
     }
 }

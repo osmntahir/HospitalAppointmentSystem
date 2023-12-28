@@ -21,7 +21,7 @@ namespace HospitalAppointmentSystem.Controllers
         // GET: Randevus
         public async Task<IActionResult> Index()
         {
-            var hospitalContext = _context.Randevus.Include(r => r.Doktor).Include(r => r.Kullanici).Include(r => r.Poliklinik);
+            var hospitalContext = _context.Randevus.Include(r => r.CalismaGun).Include(r => r.Doktor).Include(r => r.Kullanici).Include(r => r.Poliklinik).Include(r => r.Saat);
             return View(await hospitalContext.ToListAsync());
         }
 
@@ -34,9 +34,11 @@ namespace HospitalAppointmentSystem.Controllers
             }
 
             var randevu = await _context.Randevus
+                .Include(r => r.CalismaGun)
                 .Include(r => r.Doktor)
                 .Include(r => r.Kullanici)
                 .Include(r => r.Poliklinik)
+                .Include(r => r.Saat)
                 .FirstOrDefaultAsync(m => m.RandevuId == id);
             if (randevu == null)
             {
@@ -45,22 +47,52 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(randevu);
         }
+      
+        public IActionResult GetDoktorList(int poliklinikId)
+        {
+            var doktorlar = _context.Doktors
+                .Where(d => d.PoliklinikId == poliklinikId)
+                .Select(d => new { value = d.DoktorId, text = d.Adi + " " + d.Soyadi })
+                .ToList();
 
-        // GET: Randevus/Create
+            return Json(doktorlar);
+        }
+
+
+        public IActionResult GetCalismaGunList(int doktorId)
+        {
+            var calismaGunler = _context.CalismaGuns
+                .Where(c => c.DoktorId == doktorId)
+                .Select(c => new { value = c.CalismaGunId, text = c.Gun.ToString("yyyy-MM-dd") })
+                .ToList();
+
+            return Json(calismaGunler);
+        }
+
+        public IActionResult GetSaatList(int calismaGunId)
+        {
+            var saatler = _context.Saatlers
+                .Where(s => s.CalismaGunId == calismaGunId && (s.Secilebilir == true || !s.Secilebilir.HasValue))
+                .Select(s => new { value = s.SaatId, text = s.SaatDilimi.ToString("HH:mm") })
+                .ToList();
+
+            return Json(saatler);
+        }
+
+        // Create fonksiyonları
         public IActionResult Create()
         {
-            ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId");
-            ViewData["KullaniciId"] = new SelectList(_context.Kullanicis, "KullaniciId", "KullaniciId");
-            ViewData["PoliklinikId"] = new SelectList(_context.Polikliniks, "PoliklinikId", "PoliklinikId");
+            ViewBag.PoliklinikId = new SelectList(_context.Polikliniks, "PoliklinikId", "Adi");
+            ViewBag.DoktorId = new SelectList(new List<SelectListItem>(), "Value", "Text"); // Boş bir doktor listesiyle başla
+            ViewBag.CalismaGunId = new SelectList(new List<SelectListItem>(), "Value", "Text"); // Boş bir çalışma günü listesiyle başla
+            ViewBag.SaatId = new SelectList(new List<SelectListItem>(), "Value", "Text"); // Boş bir saat listesiyle başla
+
             return View();
         }
 
-        // POST: Randevus/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RandevuId,PoliklinikId,DoktorId,KullaniciId,RandevuTarihiSaat,Aciklama")] Randevu randevu)
+        public async Task<IActionResult> Create([Bind("RandevuId,PoliklinikId,DoktorId,KullaniciId,CalismaGunId,SaatId,Aciklama")] Randevu randevu)
         {
             if (ModelState.IsValid)
             {
@@ -68,13 +100,19 @@ namespace HospitalAppointmentSystem.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", randevu.DoktorId);
-            ViewData["KullaniciId"] = new SelectList(_context.Kullanicis, "KullaniciId", "KullaniciId", randevu.KullaniciId);
-            ViewData["PoliklinikId"] = new SelectList(_context.Polikliniks, "PoliklinikId", "PoliklinikId", randevu.PoliklinikId);
+
+            // ModelState geçersizse, tekrar seçimleri yüklememiz gerekiyor
+            ViewBag.PoliklinikId = new SelectList(_context.Polikliniks, "PoliklinikId", "Adi", randevu.PoliklinikId);
+            ViewBag.DoktorId = new SelectList(_context.Doktors.Where(d => d.PoliklinikId == randevu.PoliklinikId), "DoktorId", "Adi", randevu.DoktorId);
+            ViewBag.CalismaGunId = new SelectList(_context.CalismaGuns.Where(c => c.DoktorId == randevu.DoktorId), "CalismaGunId", "Gun", randevu.CalismaGunId);
+            ViewBag.SaatId = new SelectList(_context.Saatlers
+                .Where(s => s.CalismaGunId == randevu.CalismaGunId && (s.Secilebilir == true || !s.Secilebilir.HasValue))
+                .Select(s => new SelectListItem { Value = s.SaatId.ToString(), Text = s.SaatDilimi.ToString("HH:mm") }), "Value", "Text", randevu.SaatId);
+
             return View(randevu);
         }
 
-        
+
 
         // GET: Randevus/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -89,9 +127,11 @@ namespace HospitalAppointmentSystem.Controllers
             {
                 return NotFound();
             }
+            ViewData["CalismaGunId"] = new SelectList(_context.CalismaGuns, "CalismaGunId", "CalismaGunId", randevu.CalismaGunId);
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", randevu.DoktorId);
             ViewData["KullaniciId"] = new SelectList(_context.Kullanicis, "KullaniciId", "KullaniciId", randevu.KullaniciId);
             ViewData["PoliklinikId"] = new SelectList(_context.Polikliniks, "PoliklinikId", "PoliklinikId", randevu.PoliklinikId);
+            ViewData["SaatId"] = new SelectList(_context.Saatlers, "SaatId", "SaatId", randevu.SaatId);
             return View(randevu);
         }
 
@@ -100,7 +140,7 @@ namespace HospitalAppointmentSystem.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RandevuId,PoliklinikId,DoktorId,KullaniciId,RandevuTarihiSaat,Aciklama")] Randevu randevu)
+        public async Task<IActionResult> Edit(int id, [Bind("RandevuId,PoliklinikId,DoktorId,KullaniciId,CalismaGunId,SaatId,Aciklama")] Randevu randevu)
         {
             if (id != randevu.RandevuId)
             {
@@ -127,9 +167,11 @@ namespace HospitalAppointmentSystem.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CalismaGunId"] = new SelectList(_context.CalismaGuns, "CalismaGunId", "CalismaGunId", randevu.CalismaGunId);
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", randevu.DoktorId);
             ViewData["KullaniciId"] = new SelectList(_context.Kullanicis, "KullaniciId", "KullaniciId", randevu.KullaniciId);
             ViewData["PoliklinikId"] = new SelectList(_context.Polikliniks, "PoliklinikId", "PoliklinikId", randevu.PoliklinikId);
+            ViewData["SaatId"] = new SelectList(_context.Saatlers, "SaatId", "SaatId", randevu.SaatId);
             return View(randevu);
         }
 
@@ -142,9 +184,11 @@ namespace HospitalAppointmentSystem.Controllers
             }
 
             var randevu = await _context.Randevus
+                .Include(r => r.CalismaGun)
                 .Include(r => r.Doktor)
                 .Include(r => r.Kullanici)
                 .Include(r => r.Poliklinik)
+                .Include(r => r.Saat)
                 .FirstOrDefaultAsync(m => m.RandevuId == id);
             if (randevu == null)
             {
@@ -179,4 +223,3 @@ namespace HospitalAppointmentSystem.Controllers
         }
     }
 }
-        

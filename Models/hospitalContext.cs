@@ -21,12 +21,14 @@ namespace HospitalAppointmentSystem.Models
         public virtual DbSet<Kullanici> Kullanicis { get; set; } = null!;
         public virtual DbSet<Poliklinik> Polikliniks { get; set; } = null!;
         public virtual DbSet<Randevu> Randevus { get; set; } = null!;
+        public virtual DbSet<Saatler> Saatlers { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("Server=DESKTOP-39QEI7I; Database=hospital; Trusted_Connection=True;");
             }
         }
 
@@ -36,9 +38,7 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("CalismaGun");
 
-                entity.Property(e => e.CalismaGunId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("CalismaGunID");
+                entity.Property(e => e.CalismaGunId).HasColumnName("CalismaGunID");
 
                 entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
 
@@ -50,16 +50,14 @@ namespace HospitalAppointmentSystem.Models
                     .WithMany(p => p.CalismaGuns)
                     .HasForeignKey(d => d.DoktorId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__CalismaGu__Dokto__43F60EC8");
+                    .HasConstraintName("FK__CalismaGu__Dokto__6EE06CCD");
             });
 
             modelBuilder.Entity<Doktor>(entity =>
             {
                 entity.ToTable("Doktor");
 
-                entity.Property(e => e.DoktorId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("DoktorID");
+                entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
 
@@ -83,7 +81,7 @@ namespace HospitalAppointmentSystem.Models
                     .WithMany(p => p.Doktors)
                     .HasForeignKey(d => d.PoliklinikId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Doktor__Poliklin__4119A21D");
+                    .HasConstraintName("FK__Doktor__Poliklin__6C040022");
             });
 
             modelBuilder.Entity<Kullanici>(entity =>
@@ -117,9 +115,7 @@ namespace HospitalAppointmentSystem.Models
             {
                 entity.ToTable("Poliklinik");
 
-                entity.Property(e => e.PoliklinikId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("PoliklinikID");
+                entity.Property(e => e.PoliklinikId).HasColumnName("PoliklinikID");
 
                 entity.Property(e => e.Adi).HasMaxLength(255);
             });
@@ -132,28 +128,61 @@ namespace HospitalAppointmentSystem.Models
 
                 entity.Property(e => e.Aciklama).HasMaxLength(500);
 
+                entity.Property(e => e.CalismaGunId).HasColumnName("CalismaGunID");
+
                 entity.Property(e => e.DoktorId).HasColumnName("DoktorID");
 
                 entity.Property(e => e.PoliklinikId).HasColumnName("PoliklinikID");
 
-                entity.Property(e => e.RandevuTarihiSaat).HasColumnType("datetime");
+                entity.Property(e => e.SaatId).HasColumnName("SaatID");
+
+                entity.HasOne(d => d.CalismaGun)
+                    .WithMany(p => p.Randevus)
+                    .HasForeignKey(d => d.CalismaGunId)
+                    .HasConstraintName("FK_Randevu_CalismaGun");
 
                 entity.HasOne(d => d.Doktor)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.DoktorId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__DoktorI__505BE5AD");
+                    .HasConstraintName("FK__Randevu__DoktorI__01F34141");
 
                 entity.HasOne(d => d.Kullanici)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.KullaniciId)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK__Randevu__Kullani__515009E6");
+                    .HasConstraintName("FK__Randevu__Kullani__02E7657A");
 
                 entity.HasOne(d => d.Poliklinik)
                     .WithMany(p => p.Randevus)
                     .HasForeignKey(d => d.PoliklinikId)
-                    .HasConstraintName("FK__Randevu__Polikli__52442E1F");
+                    .HasConstraintName("FK__Randevu__Polikli__03DB89B3");
+
+                entity.HasOne(d => d.Saat)
+                    .WithMany(p => p.Randevus)
+                    .HasForeignKey(d => d.SaatId)
+                    .HasConstraintName("FK_Randevu_Saatler");
+            });
+
+            modelBuilder.Entity<Saatler>(entity =>
+            {
+                entity.HasKey(e => e.SaatId)
+                    .HasName("PK__Saatler__A82183CFE697CE3C");
+
+                entity.ToTable("Saatler");
+
+                entity.Property(e => e.SaatId).HasColumnName("SaatID");
+
+                entity.Property(e => e.CalismaGunId).HasColumnName("CalismaGunID");
+
+                entity.Property(e => e.Secilebilir)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.CalismaGun)
+                    .WithMany(p => p.Saatlers)
+                    .HasForeignKey(d => d.CalismaGunId)
+                    .HasConstraintName("FK__Saatler__Calisma__71BCD978");
             });
 
             OnModelCreatingPartial(modelBuilder);

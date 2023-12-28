@@ -29,9 +29,14 @@
                 <span asp-validation-for="KullaniciId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RandevuTarihiSaat" class="control-label"></label>
-                <input asp-for="RandevuTarihiSaat" class="form-control" />
-                <span asp-validation-for="RandevuTarihiSaat" class="text-danger"></span>
+                <label asp-for="CalismaGunId" class="control-label"></label>
+                <select asp-for="CalismaGunId" class="form-control" asp-items="ViewBag.CalismaGunId"></select>
+                <span asp-validation-for="CalismaGunId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaatId" class="control-label"></label>
+                <select asp-for="SaatId" class="form-control" asp-items="ViewBag.SaatId"></select>
+                <span asp-validation-for="SaatId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Aciklama" class="control-label"></label>
