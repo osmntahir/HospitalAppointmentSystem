@@ -205,14 +205,30 @@ namespace HospitalAppointmentSystem.Controllers
         {
             if (_context.Randevus == null)
             {
-                return Problem("Entity set 'hospitalContext.Randevus'  is null.");
+                return Problem("Entity set 'hospitalContext.Randevus' is null.");
             }
+
             var randevu = await _context.Randevus.FindAsync(id);
             if (randevu != null)
             {
+                // SaatID'yi al
+                // SaatID'yi al
+                int? saatIdNullable = randevu.SaatId;
+
+                // Eğer saatIdNullable null değilse, intValue değişkenine atama yap
+                int intValue = saatIdNullable ?? 0;
+
+
                 _context.Randevus.Remove(randevu);
+
+                // İlgili saat dilimini tekrar "secilebilir" yap
+                var saat = await _context.Saatlers.FindAsync(saatIdNullable);
+                if (saat != null)
+                {
+                    saat.Secilebilir = true;
+                }
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

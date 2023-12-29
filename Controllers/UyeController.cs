@@ -35,11 +35,11 @@ namespace HospitalAppointmentSystem.Controllers
             if (kullanici != null)
             {
                 var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, kullanici.KullaniciId.ToString()), // Include user ID in claims
-                    new Claim(ClaimTypes.Email, k.Email),
-                    new Claim(ClaimTypes.Role, kullanici.KullaniciRole),
-                };
+        {
+           new Claim(ClaimTypes.NameIdentifier, kullanici.KullaniciId.ToString()), // Include user ID in claims
+            new Claim(ClaimTypes.Email, k.Email),
+            new Claim(ClaimTypes.Role, kullanici.KullaniciRole),
+        };
 
                 ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
@@ -58,6 +58,7 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View();
         }
+
 
         public async Task<IActionResult> CikisYap()
         {

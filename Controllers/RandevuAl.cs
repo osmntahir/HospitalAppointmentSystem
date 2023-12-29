@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 [Authorize(Roles ="U")]
 public class RandevuController : Controller
@@ -94,17 +95,32 @@ public class RandevuController : Controller
         {
             if (User.Identity.IsAuthenticated)
             {
-                // Kullanıcı kimliğini al
-                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
 
-                // Kullanıcı kimliğini atama
-                randevu.KullaniciId = string.IsNullOrEmpty(userId) ? (int?)null : int.Parse(userId);
+                if (userIdClaim != null)
+                {
+                    var userId = userIdClaim.Value;
+                    randevu.KullaniciId = string.IsNullOrEmpty(userId) ? (int?)null : int.Parse(userId);
+                }
+
+                _context.Add(randevu);
+
+                // Seçilen saat dilimini bul
+                var selectedSaat = _context.Saatlers.FirstOrDefault(s => s.SaatId == randevu.SaatId);
+
+                if (selectedSaat != null)
+                {
+                    // Seçilen saat dilimini artık seçilemez yap
+                    selectedSaat.Secilebilir = false;
+                }
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+
+
             }
-            _context.Add(randevu);
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
+        
 
         // ModelState geçersizse, tekrar seçimleri yüklememiz gerekiyor
         var poliklinikler = _context.Polikliniks.ToList();
