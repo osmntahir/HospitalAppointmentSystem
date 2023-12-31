@@ -1,0 +1,47 @@
+﻿@model HospitalAppointmentSystem.Models.CalismaGun
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>CalismaGun</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="DoktorId" class="control-label"></label>
+                <select asp-for="DoktorId" class ="form-control" asp-items="ViewBag.DoktorId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gun" class="control-label"></label>
+                <input asp-for="Gun" class="form-control" />
+                <span asp-validation-for="Gun" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BaslangicSaati" class="control-label"></label>
+                <input asp-for="BaslangicSaati" class="form-control" />
+                <span asp-validation-for="BaslangicSaati" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BitisSaati" class="control-label"></label>
+                <input asp-for="BitisSaati" class="form-control" />
+                <span asp-validation-for="BitisSaati" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

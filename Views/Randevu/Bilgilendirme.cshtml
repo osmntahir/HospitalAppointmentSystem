@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Bilgilendirme";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f2f2f2;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+       p {
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bilgilendirme</h1>
+        <p>
+            Daha önce bu polikinlikten randevu aldiniz. Ayni polikinlikten birden fazla randevu alamazsiniz !!  <a href="/Randevu/Index" style="color: #4CAF50;">buraya tıklayarak tekrar randevu alabilirsiniz</a>
+            .
+        </p>
+    </div>
+</body>
+</html>

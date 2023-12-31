@@ -47,73 +47,7 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(randevu);
         }
-      
-        public IActionResult GetDoktorList(int poliklinikId)
-        {
-            var doktorlar = _context.Doktors
-                .Where(d => d.PoliklinikId == poliklinikId)
-                .Select(d => new { value = d.DoktorId, text = d.Adi + " " + d.Soyadi })
-                .ToList();
-
-            return Json(doktorlar);
-        }
-
-
-        public IActionResult GetCalismaGunList(int doktorId)
-        {
-            var calismaGunler = _context.CalismaGuns
-                .Where(c => c.DoktorId == doktorId)
-                .Select(c => new { value = c.CalismaGunId, text = c.Gun.ToString("yyyy-MM-dd") })
-                .ToList();
-
-            return Json(calismaGunler);
-        }
-
-        public IActionResult GetSaatList(int calismaGunId)
-        {
-            var saatler = _context.Saatlers
-                .Where(s => s.CalismaGunId == calismaGunId && (s.Secilebilir == true || !s.Secilebilir.HasValue))
-                .Select(s => new { value = s.SaatId, text = s.SaatDilimi.ToString("HH:mm") })
-                .ToList();
-
-            return Json(saatler);
-        }
-
-        // Create fonksiyonları
-        public IActionResult Create()
-        {
-            ViewBag.PoliklinikId = new SelectList(_context.Polikliniks, "PoliklinikId", "Adi");
-            ViewBag.DoktorId = new SelectList(new List<SelectListItem>(), "Value", "Text"); // Boş bir doktor listesiyle başla
-            ViewBag.CalismaGunId = new SelectList(new List<SelectListItem>(), "Value", "Text"); // Boş bir çalışma günü listesiyle başla
-            ViewBag.SaatId = new SelectList(new List<SelectListItem>(), "Value", "Text"); // Boş bir saat listesiyle başla
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RandevuId,PoliklinikId,DoktorId,KullaniciId,CalismaGunId,SaatId,Aciklama")] Randevu randevu)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(randevu);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-
-            // ModelState geçersizse, tekrar seçimleri yüklememiz gerekiyor
-            ViewBag.PoliklinikId = new SelectList(_context.Polikliniks, "PoliklinikId", "Adi", randevu.PoliklinikId);
-            ViewBag.DoktorId = new SelectList(_context.Doktors.Where(d => d.PoliklinikId == randevu.PoliklinikId), "DoktorId", "Adi", randevu.DoktorId);
-            ViewBag.CalismaGunId = new SelectList(_context.CalismaGuns.Where(c => c.DoktorId == randevu.DoktorId), "CalismaGunId", "Gun", randevu.CalismaGunId);
-            ViewBag.SaatId = new SelectList(_context.Saatlers
-                .Where(s => s.CalismaGunId == randevu.CalismaGunId && (s.Secilebilir == true || !s.Secilebilir.HasValue))
-                .Select(s => new SelectListItem { Value = s.SaatId.ToString(), Text = s.SaatDilimi.ToString("HH:mm") }), "Value", "Text", randevu.SaatId);
-
-            return View(randevu);
-        }
-
-
-
+     
         // GET: Randevus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

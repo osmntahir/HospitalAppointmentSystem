@@ -18,6 +18,26 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/CalismaGuns/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsaXNtYUd1bnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/CalismaGuns/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsaXNtYUd1bnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/CalismaGuns/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsaXNtYUd1bnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/CalismaGuns/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsaXNtYUd1bnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/CalismaGuns/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2FsaXNtYUd1bnNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Doktors/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9rdG9yc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -70,10 +90,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9saWtsaW5pa3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Randevus/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFuZGV2dXNcQ3JlYXRlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Randevus/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFuZGV2dXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -90,8 +106,32 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFuZGV2dXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Randevu/Bilgilendirme.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFuZGV2dVxCaWxnaWxlbmRpcm1lLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Randevu/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFuZGV2dVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Saatlers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FhdGxlcnNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Saatlers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FhdGxlcnNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Saatlers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FhdGxlcnNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Saatlers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FhdGxlcnNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Saatlers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2FhdGxlcnNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/osman/source/repos/HospitalAppointmentSystem/HospitalAppointmentSystem/Views/Shared/Error.cshtml]
