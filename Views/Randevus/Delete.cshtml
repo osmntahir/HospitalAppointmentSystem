@@ -11,44 +11,44 @@
     <h4>Randevu</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Aciklama)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Aciklama)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CalismaGun)
+        <dt class="col-sm-2">
+            Calisma Gun
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CalismaGun.CalismaGunId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CalismaGun.Gun)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Doktor)
+        <dt class="col-sm-2">
+            Doktor
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Doktor.DoktorId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Doktor.Adi) @Html.DisplayFor(model => model.Doktor.Soyadi)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Kullanici)
+        <dt class="col-sm-2">
+            Kullanici
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kullanici.KullaniciId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Kullanici.Adi) @Html.DisplayFor(model => model.Kullanici.Soyadi)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Poliklinik)
+        <dt class="col-sm-2">
+            Poliklinik
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Poliklinik.PoliklinikId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Poliklinik.Adi)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Saat)
+        <dt class="col-sm-2">
+            Saat
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Saat.SaatId)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Saat.SaatDilimi)
         </dd>
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="RandevuId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
