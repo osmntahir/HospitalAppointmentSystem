@@ -1,3 +1,101 @@
+/* _content/HospitalAppointmentSystem/Views/Shared/admin.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-ohv46fxgsm] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-ohv46fxgsm] {
+  color: #0077cc;
+}
+
+.btn-primary[b-ohv46fxgsm] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-ohv46fxgsm], .nav-pills .show > .nav-link[b-ohv46fxgsm] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-ohv46fxgsm] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-ohv46fxgsm] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-ohv46fxgsm] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-ohv46fxgsm] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-ohv46fxgsm] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
+/* _content/HospitalAppointmentSystem/Views/Shared/kullanici.cshtml.rz.scp.css */
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand[b-dq2ndpossk] {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+a[b-dq2ndpossk] {
+  color: #0077cc;
+}
+
+.btn-primary[b-dq2ndpossk] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active[b-dq2ndpossk], .nav-pills .show > .nav-link[b-dq2ndpossk] {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.border-top[b-dq2ndpossk] {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom[b-dq2ndpossk] {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow[b-dq2ndpossk] {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy[b-dq2ndpossk] {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+.footer[b-dq2ndpossk] {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
+}
 /* _content/HospitalAppointmentSystem/Views/Shared/Layout2.cshtml.rz.scp.css */
 /* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */

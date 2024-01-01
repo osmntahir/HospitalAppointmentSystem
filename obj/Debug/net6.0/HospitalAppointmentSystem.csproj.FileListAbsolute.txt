@@ -277,3 +277,5 @@ C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem\
 C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
 C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem\obj\Debug\net6.0\scopedcss\Views\Shared\Layout2.cshtml.rz.scp.css
+C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem\obj\Debug\net6.0\scopedcss\Views\Shared\admin.cshtml.rz.scp.css
+C:\Users\osman\source\repos\HospitalAppointmentSystem\HospitalAppointmentSystem\obj\Debug\net6.0\scopedcss\Views\Shared\kullanici.cshtml.rz.scp.css

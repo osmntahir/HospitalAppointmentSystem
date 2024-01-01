@@ -1,3 +1,14 @@
 ﻿@{
-    Layout = "_Layout";
+    if (User.IsInRole("A"))
+    {
+        Layout = "admin";
+    }
+    else if(User.IsInRole("U"))
+    {
+        Layout = "kullanici";
+    }
+    else
+    {
+        Layout = "GirisLayout";
+    }
 }
