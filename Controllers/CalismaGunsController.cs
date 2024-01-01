@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HospitalAppointmentSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAppointmentSystem.Controllers
 {
@@ -19,6 +20,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: CalismaGuns
+        [Authorize(Roles = "A, U")]
         public async Task<IActionResult> Index()
         {
             var hospitalContext = _context.CalismaGuns.Include(c => c.Doktor);
@@ -26,6 +28,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: CalismaGuns/Details/5
+        [Authorize(Roles = "A, U")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.CalismaGuns == null)
@@ -43,6 +46,7 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(calismaGun);
         }
+        [Authorize(Roles = "A")]
 
         // GET: CalismaGuns/Create
         public IActionResult Create()
@@ -54,6 +58,7 @@ namespace HospitalAppointmentSystem.Controllers
         // POST: CalismaGuns/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "A")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CalismaGunId,DoktorId,Gun,BaslangicSaati,BitisSaati")] CalismaGun calismaGun)
@@ -67,7 +72,7 @@ namespace HospitalAppointmentSystem.Controllers
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", calismaGun.DoktorId);
             return View(calismaGun);
         }
-
+        [Authorize(Roles = "A")]
         // GET: CalismaGuns/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -84,6 +89,7 @@ namespace HospitalAppointmentSystem.Controllers
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", calismaGun.DoktorId);
             return View(calismaGun);
         }
+        [Authorize(Roles = "A")]
 
         // POST: CalismaGuns/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -120,7 +126,7 @@ namespace HospitalAppointmentSystem.Controllers
             ViewData["DoktorId"] = new SelectList(_context.Doktors, "DoktorId", "DoktorId", calismaGun.DoktorId);
             return View(calismaGun);
         }
-
+        [Authorize(Roles = "A")]
         // GET: CalismaGuns/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -139,7 +145,7 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(calismaGun);
         }
-
+        [Authorize(Roles = "A")]
         // POST: CalismaGuns/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

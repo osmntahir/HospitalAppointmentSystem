@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "BrsII6vy5h1QJwMIRPyBDLQCnqgvGs1LVaeTSpWj+BI=",
+  "Hash": "4a68FFT591hfafDkYtmZf3/Yj81Dw5ln+6SKc3juL4c=",
   "Source": "HospitalAppointmentSystem",
   "BasePath": "_content/HospitalAppointmentSystem",
   "Mode": "Default",
@@ -53,6 +53,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\HospitalAppointmentSystem.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\GirisYap - Copy.css",
+      "SourceId": "HospitalAppointmentSystem",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\",
+      "BasePath": "_content/HospitalAppointmentSystem",
+      "RelativePath": "css/GirisYap - Copy.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\GirisYap - Copy.css"
     },
     {
       "Identity": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\GirisYap.css",

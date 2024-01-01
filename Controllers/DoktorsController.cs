@@ -20,12 +20,13 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Doktors
+        [Authorize(Roles = "A, U")]
         public async Task<IActionResult> Index()
         {
             var hospitalContext = _context.Doktors.Include(d => d.Poliklinik);
             return View(await hospitalContext.ToListAsync());
         }
-
+        [Authorize(Roles = "A, U")]
         // GET: Doktors/Details/5
         public async Task<IActionResult> Details(int? id)
         {

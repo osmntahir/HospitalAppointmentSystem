@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HospitalAppointmentSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAppointmentSystem.Controllers
 {
@@ -19,13 +20,14 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Polikliniks
+        [Authorize(Roles = "A, U")]
         public async Task<IActionResult> Index()
         {
               return _context.Polikliniks != null ? 
                           View(await _context.Polikliniks.ToListAsync()) :
                           Problem("Entity set 'hospitalContext.Polikliniks'  is null.");
         }
-
+        [Authorize(Roles = "A, U")]
         // GET: Polikliniks/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -43,6 +45,7 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(poliklinik);
         }
+        [Authorize(Roles = "A")]
 
         // GET: Polikliniks/Create
         public IActionResult Create()
@@ -53,6 +56,7 @@ namespace HospitalAppointmentSystem.Controllers
         // POST: Polikliniks/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "A")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("PoliklinikId,Adi")] Poliklinik poliklinik)
@@ -67,6 +71,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Polikliniks/Edit/5
+        [Authorize(Roles = "A")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Polikliniks == null)
@@ -85,6 +90,7 @@ namespace HospitalAppointmentSystem.Controllers
         // POST: Polikliniks/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "A")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("PoliklinikId,Adi")] Poliklinik poliklinik)
@@ -118,6 +124,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Polikliniks/Delete/5
+        [Authorize(Roles = "A")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Polikliniks == null)
@@ -136,6 +143,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // POST: Polikliniks/Delete/5
+        [Authorize(Roles = "A")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

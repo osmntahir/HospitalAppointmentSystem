@@ -38,6 +38,27 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(viewModel);
         }
+
+        [HttpPost]
+        public IActionResult IptalEt(int randevuId)
+        {
+            var randevu = _context.Randevus
+                .Include(r => r.Saat)
+                .FirstOrDefault(r => r.RandevuId == randevuId);
+
+            if (randevu != null)
+            {
+                // Randevuyu iptal etme işlemleri
+                _context.Randevus.Remove(randevu);
+                _context.SaveChanges();
+
+                // İptal edilen randevunun saat dilimini tekrar seçilebilir yapma
+                randevu.Saat.Secilebilir = true;
+                _context.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 
 }

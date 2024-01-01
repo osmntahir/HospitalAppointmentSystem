@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HospitalAppointmentSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HospitalAppointmentSystem.Controllers
 {
@@ -19,6 +20,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Randevus
+        [Authorize(Roles = "A")]
         public async Task<IActionResult> Index()
         {
             var hospitalContext = _context.Randevus.Include(r => r.CalismaGun).Include(r => r.Doktor).Include(r => r.Kullanici).Include(r => r.Poliklinik).Include(r => r.Saat);
@@ -26,6 +28,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Randevus/Details/5
+        [Authorize(Roles = "A")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Randevus == null)
@@ -47,7 +50,7 @@ namespace HospitalAppointmentSystem.Controllers
 
             return View(randevu);
         }
-     
+        [Authorize(Roles = "A")]
         // GET: Randevus/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -72,6 +75,7 @@ namespace HospitalAppointmentSystem.Controllers
         // POST: Randevus/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "A")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RandevuId,PoliklinikId,DoktorId,KullaniciId,CalismaGunId,SaatId,Aciklama")] Randevu randevu)
@@ -110,6 +114,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // GET: Randevus/Delete/5
+        [Authorize(Roles = "A")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Randevus == null)
@@ -133,6 +138,7 @@ namespace HospitalAppointmentSystem.Controllers
         }
 
         // POST: Randevus/Delete/5
+        [Authorize(Roles = "A")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

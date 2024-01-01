@@ -16,6 +16,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.CalismaGunId)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Gun)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CalismaGunId)
+                </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Gun)
             </td>
@@ -42,9 +48,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BitisSaati)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Doktor.DoktorId)
-            </td>
+                <td>
+                    @{
+                        var doktorAdiSoyadi = $"{item.Doktor.Adi} {item.Doktor.Soyadi}";
+                    }
+                    @Html.DisplayFor(modelItem => doktorAdiSoyadi)
+                </td>
+
                 @if (User.IsInRole("A"))
                 {
                     <td>

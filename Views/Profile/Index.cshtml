@@ -22,32 +22,113 @@
         <dd class="col-sm-10">
             @Model.Kullanici.Soyadi
         </dd>
+        <dt class="col-sm-2">
+            E-posta
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Kullanici.Email
+        </dd>
+        <dt class="col-sm-2">
+            Telefon Numarası
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Kullanici.TelefonNumarasi
+        </dd>
+        <dt class="col-sm-2">
+            Doğum Tarihi
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Kullanici.DogumTarihi.ToString()
+        </dd>
         <!-- Diğer kullanıcı bilgileri için benzer şekilde devam edebilirsiniz -->
     </dl>
 </div>
-
-<div>
-    <h4>Aldığınız Randevular</h4>
-    <hr />
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Tarih</th>
-                <th>Doktor</th>
-                <th>Poliklinik</th>
-                <!-- Diğer kolon başlıkları -->
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var randevu in Model.Randevular)
-            {
+<!-- Profil sayfasındaki diğer kodlar -->
+@if (User.IsInRole("U"))
+{
+    <div>
+        <h4>Aldığınız Randevular</h4>
+        <hr />
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@randevu.CalismaGun.Gun - @randevu.Saat.SaatDilimi</td>
-                    <td>@($"{randevu.Doktor.Adi} {randevu.Doktor.Soyadi}")</td>
-                    <td>@randevu.Poliklinik.Adi</td>
-                    <!-- Diğer kolonlar -->
+                    <th>Tarih</th>
+                    <th>Doktor</th>
+                    <th>Poliklinik</th>
+                    <th></th> <!-- İptal etme butonu için eklenen sütun -->
+                    <!-- Diğer kolon başlıkları -->
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var randevu in Model.Randevular)
+                {
+                    <tr>
+                        <td>@randevu.CalismaGun.Gun - @randevu.Saat.SaatDilimi</td>
+                        <td>@($"{randevu.Doktor.Adi} {randevu.Doktor.Soyadi}")</td>
+                        <td>@randevu.Poliklinik.Adi</td>
+                        <td>
+                            <button class="btn btn-danger" onclick="showConfirmationDialog('@randevu.RandevuId')">İptal Et</button>
+                        </td>
+                        <!-- Diğer kolonlar -->
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+<!-- Onaylama Dialogu -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Onaylama</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Randevuyu iptal etmek istediğinize emin misiniz?</strong></p>
+                <button class="btn btn-secondary" onclick="closeConfirmationDialog()">Vazgec</button>
+                <button class="btn btn-danger" onclick="confirmCancellation()">Onaylıyorum ve İptal Et</button>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- JavaScript -->
+<script>
+    function showConfirmationDialog(randevuId) {
+        $('#confirmationModal').modal('show');
+        // Randevu ID'sini saklamak için bir gizli alan ekleyebilirsiniz.
+        $('#confirmationModal').data('randevuId', randevuId);
+    }
+
+    function closeConfirmationDialog() {
+        $('#confirmationModal').modal('hide');
+    }
+
+    function confirmCancellation() {
+        var randevuId = $('#confirmationModal').data('randevuId');
+
+        // Ajax veya başka bir yöntemle randevuyu iptal etme işlemini gerçekleştirin
+        $.ajax({
+            url: '/Profile/IptalEt', // İptal etme işlemi gerçekleştirilecek URL
+            type: 'POST',
+            data: { randevuId: randevuId },
+            success: function (result) {
+                // İptal işlemi başarılıysa buraya gelir
+                console.log('Randevu iptal edildi: ' + randevuId);
+                // Modalı kapat
+                $('#confirmationModal').modal('hide');
+
+                // Burada sayfayı yenileyebilirsiniz
+                location.reload();
+            },
+            error: function (error) {
+                // İptal işlemi başarısızsa buraya gelir
+                console.log('Randevu iptal edilemedi: ' + randevuId);
+            }
+        });
+    }
+</script>
+

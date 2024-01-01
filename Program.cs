@@ -1,4 +1,4 @@
-    using HospitalAppointmentSystem.Models;
+﻿    using HospitalAppointmentSystem.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 

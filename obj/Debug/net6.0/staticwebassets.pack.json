@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\HospitalAppointmentSystem.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\GirisYap - Copy.css",
+      "PackagePath": "staticwebassets\\css\\GirisYap - Copy.css"
+    },
+    {
       "Id": "C:\\Users\\osman\\source\\repos\\HospitalAppointmentSystem\\HospitalAppointmentSystem\\wwwroot\\css\\GirisYap.css",
       "PackagePath": "staticwebassets\\css\\GirisYap.css"
     },
