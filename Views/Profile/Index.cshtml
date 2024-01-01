@@ -1,0 +1,53 @@
+﻿@model ProfileViewModel
+
+@{
+    ViewData["Title"] = "My Profile";
+}
+
+<h2>My Profile</h2>
+
+<div>
+    <h4>Kullanıcı Bilgileri</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Adı
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Kullanici.Adi
+        </dd>
+        <dt class="col-sm-2">
+            Soyadı
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Kullanici.Soyadi
+        </dd>
+        <!-- Diğer kullanıcı bilgileri için benzer şekilde devam edebilirsiniz -->
+    </dl>
+</div>
+
+<div>
+    <h4>Aldığınız Randevular</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Doktor</th>
+                <th>Poliklinik</th>
+                <!-- Diğer kolon başlıkları -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var randevu in Model.Randevular)
+            {
+                <tr>
+                    <td>@randevu.CalismaGun.Gun - @randevu.Saat.SaatDilimi</td>
+                    <td>@($"{randevu.Doktor.Adi} {randevu.Doktor.Soyadi}")</td>
+                    <td>@randevu.Poliklinik.Adi</td>
+                    <!-- Diğer kolonlar -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

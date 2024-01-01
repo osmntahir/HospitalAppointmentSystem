@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -36,7 +37,22 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Uye" asp-action="CikisYap">Cikis Yap</a>
                         </li>
+                     
                     </ul>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @(User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Email)?.Value : "")
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-controller="Profile" asp-action="Index">Profilim</a>
+                            <a class="dropdown-item" asp-controller="Uye" asp-action="SifreDegistir">Sifre Degistir</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-controller="Uye" asp-action="CikisYap">Cikis yap</a>
+                        </div>
+                    </li>
+
+
                 </div>
             </div>
         </nav>
@@ -48,9 +64,7 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - HospitalAppointmentSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
+        
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

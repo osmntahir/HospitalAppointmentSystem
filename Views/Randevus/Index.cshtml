@@ -53,11 +53,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Saat.SaatDilimi)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.RandevuId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.RandevuId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.RandevuId">Delete</a>
-                </td>
+                @if (User.IsInRole("A"))
+                {
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.RandevuId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.RandevuId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.RandevuId">Delete</a>
+                    </td>
+                }
+               
             </tr>
         }
     </tbody>
