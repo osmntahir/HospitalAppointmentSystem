@@ -1,16 +1,22 @@
 ﻿@{
+
+    @using System.Security.Claims
     ViewData["Title"] = "Hastane Sistemi";
 }
 
 <div class="container text-center mt-5">
-    <h1 class="display-4">Hoş Geldiniz!</h1>
-    <p class="lead">Hastane Sistemine hoş geldiniz. Sağlık hizmetlerimize ulaşmak için lütfen giriş yapın.</p>
+    <h1 class="display-4">Hastane Sistemi</h1>
+    <p class="lead">Hoş geldiniz! Hastane Sistemine hoş geldiniz. Sağlık hizmetlerimize ulaşmak için lütfen giriş yapın.</p>
     <p class="lead">Hastane randevularınızı online olarak planlayabilir ve yönetebilirsiniz.</p>
+
     @if (!User.Identity.IsAuthenticated)
     {
         <a class="btn btn-primary btn-lg" href="@Url.Action("GirisYap", "Uye")" role="button">Giriş Yap</a>
     }
-
-   
-
+    else
+    {
+        <!-- Kullanıcı giriş yapmışsa, bir şeyler ekleyebilirsiniz. -->
+        <p class="lead">Hoş geldiniz,   @(User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Email)?.Value : "")</p>
+        <!-- Örneğin: <a class="btn btn-success btn-lg" href="#" role="button">Randevularım</a> -->
+    }
 </div>

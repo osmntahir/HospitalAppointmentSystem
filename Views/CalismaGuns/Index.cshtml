@@ -1,70 +1,76 @@
 ﻿@model IEnumerable<HospitalAppointmentSystem.Models.CalismaGun>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "İndeks";
 }
 
-<h1>Index</h1>
-@if (User.IsInRole("A"))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
+<div class="container">
+    <h1>İndeks</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CalismaGunId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Gun)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BaslangicSaati)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BitisSaati)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Doktor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CalismaGunId)
-                </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gun)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BaslangicSaati)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BitisSaati)
-            </td>
-                <td>
-                    @{
-                        var doktorAdiSoyadi = $"{item.Doktor.Adi} {item.Doktor.Soyadi}";
-                    }
-                    @Html.DisplayFor(modelItem => doktorAdiSoyadi)
-                </td>
+    @if (User.IsInRole("A"))
+    {
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Yeni Oluştur</a>
+        </p>
+    }
 
-                @if (User.IsInRole("A"))
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Çalışma Gün ID
+                    </th>
+                    <th>
+                        Gün
+                    </th>
+                    <th>
+                        Başlangıç Saati
+                    </th>
+                    <th>
+                        Bitiş Saati
+                    </th>
+                    <th>
+                        Doktor
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
                 {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.CalismaGunId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.CalismaGunId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.CalismaGunId">Delete</a>
-                    </td>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CalismaGunId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gun)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BaslangicSaati)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BitisSaati)
+                        </td>
+                        <td>
+                            @{
+                                var doktorAdiSoyadi = $"{item.Doktor.Adi} {item.Doktor.Soyadi}";
+                            }
+                            @Html.DisplayFor(modelItem => doktorAdiSoyadi)
+                        </td>
+
+                        @if (User.IsInRole("A"))
+                        {
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.CalismaGunId" class="btn btn-warning">Düzenle</a>
+                                <a asp-action="Details" asp-route-id="@item.CalismaGunId" class="btn btn-info">Detaylar</a>
+                                <a asp-action="Delete" asp-route-id="@item.CalismaGunId" class="btn btn-danger">Sil</a>
+                            </td>
+                        }
+
+                    </tr>
                 }
-            
-        </tr>
-}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
+</div>

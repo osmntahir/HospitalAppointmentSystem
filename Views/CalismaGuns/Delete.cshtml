@@ -1,45 +1,52 @@
 ﻿@model HospitalAppointmentSystem.Models.CalismaGun
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Sil";
 }
 
-<h1>Delete</h1>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-danger text-white">
+            <h1>Sil</h1>
+        </div>
+        <div class="card-body">
+            <h3 class="text-danger">Bu kaydı silmek istediğinizden emin misiniz?</h3>
+            <div>
+                <h4>Çalışma Günü</h4>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-2">
+                        Gün
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Gun)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Başlangıç Saati
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.BaslangicSaati)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Bitiş Saati
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.BitisSaati)
+                    </dd>
+                    <dt class="col-sm-2">
+                        Doktor
+                    </dt>
+                    <dd class="col-sm-10">
+                        @Html.DisplayFor(model => model.Doktor.Adi)
+                    </dd>
+                </dl>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>CalismaGun</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Gun)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Gun)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BaslangicSaati)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BaslangicSaati)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BitisSaati)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BitisSaati)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Doktor)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Doktor.Adi)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="CalismaGunId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="CalismaGunId" />
+                    <button type="submit" class="btn btn-danger">Sil</button> |
+                    <a asp-action="Index" class="btn btn-secondary">Listeye Geri Dön</a>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

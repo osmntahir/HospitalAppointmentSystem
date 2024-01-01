@@ -8,71 +8,121 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HospitalAppointmentSystem.styles.css" asp-append-version="true" />
+
+    <!-- Eklediğimiz CSS kodu başlangıcı -->
+    <style>
+        #sidebar {
+            transition: margin-left 0.5s;
+            margin-top: 20px; /* Üst boşluğu ayarlayın */
+            background-color: #343a40; /* Sidebar arka plan rengi */
+            color: #fff; /* Sidebar metin rengi */
+        }
+
+            #sidebar a {
+                padding: 16px;
+                text-decoration: none;
+                font-size: 18px;
+                color: #fff;
+                display: block;
+                transition: background-color 0.3s;
+                border-bottom: 1px solid #4CAF50; /* Linkler arasına çizgi ekleyin */
+            }
+
+                #sidebar a:hover {
+                    background-color: #4CAF50; /* Link üzerine gelindiğinde renk değiştirin */
+                }
+
+            #sidebar .nav-item {
+                margin-bottom: 5px;
+            }
+
+            #sidebar .nav-link {
+                transition: padding-left 0.3s;
+                color: #fff; /* Dropdown yazı rengi */
+            }
+
+                #sidebar .nav-link:hover {
+                    padding-left: 20px;
+                }
+
+            /* Logo stili */
+            #sidebar .navbar-brand {
+                padding: 16px;
+                font-size: 24px;
+                color: #8cff66;
+                display: block;
+            }
+
+            /* Dropdown menü için stil */
+            #sidebar .dropdown-item {
+                color: #000; /* Dropdown içindeki yazı rengi */
+            }
+
+                #sidebar .dropdown-item:hover {
+                    background-color: #8cff66; /* Dropdown üzerine gelindiğinde renk değiştirin */
+                }
+
+            /* Kullanıcının e-mail yazan yeri için stil */
+            #sidebar #navbarDropdown {
+                color: #000; /* E-mail yazan yerin rengi */
+            }
+    </style>
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ADMIN PANEL </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <span class="navbar-brand">ADMIN SAYFASI</span>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Polikliniks" asp-action="Index">Polikilinikler</a>
                         </li>
-                      
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Doktors" asp-action="Index">Doktorlar</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CalismaGuns" asp-action="Index">Calisma Gunleri</a>
                         </li>
-                       
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Randevus" asp-action="Index">Randevular</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Uye" asp-action="GirisYap">Giris Yap</a>
-                        </li>
+                      
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Uye" asp-action="CikisYap">Cikis Yap</a>
                         </li>
-                       
                     </ul>
-                   
 
+                    <ul class="nav flex-column mt-3">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @(User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Email)?.Value : "")
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" asp-controller="Profile" asp-action="Index">Profilim</a>
+                                <a class="dropdown-item" asp-controller="Uye" asp-action="SifreDegistir">Sifre Degistir</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-controller="Uye" asp-action="CikisYap">Cikis yap</a>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        @(User.Identity.IsAuthenticated ? User.FindFirst(ClaimTypes.Email)?.Value : "")
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" asp-controller="Profile" asp-action="Index">Profilim</a>
-                        <a class="dropdown-item" asp-controller="Uye" asp-action="SifreDegistir">Sifre Degistir</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" asp-controller="Uye" asp-action="CikisYap">Cikis yap</a>
-                    </div>
-                </li>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            </nav>
+
+            <!-- Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-4">
+                @RenderBody()
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - HospitalAppointmentSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

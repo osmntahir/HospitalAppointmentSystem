@@ -4,39 +4,41 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-@if (User.IsInRole("A"))
-{
-    <p>
-        <a asp-action="Create">Create New</a>
-    </p>
-}
+<div class="container mt-4">
+    <h1>Poliklinikler</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Adi)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Adi)
-            </td>
+    @if (User.IsInRole("A"))
+    {
+        <p>
+            <a asp-action="Create" class="btn btn-primary">Yeni Poliklinik Ekle</a>
+        </p>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Poliklinik Adı</th>
                 @if (User.IsInRole("A"))
                 {
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.PoliklinikId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.PoliklinikId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.PoliklinikId">Delete</a>
-                    </td>
+                    <th scope="col">İşlemler</th>
                 }
-           
-        </tr>
-}
-    </tbody>
-</table>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var poliklinik in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => poliklinik.Adi)</td>
+                    @if (User.IsInRole("A"))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@poliklinik.PoliklinikId" class="btn btn-warning btn-sm">Düzenle</a>
+                            <a asp-action="Details" asp-route-id="@poliklinik.PoliklinikId" class="btn btn-info btn-sm">Detaylar</a>
+                            <a asp-action="Delete" asp-route-id="@poliklinik.PoliklinikId" class="btn btn-danger btn-sm">Sil</a>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
